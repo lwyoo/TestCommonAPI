@@ -1,4 +1,5 @@
-#include "TestStubImp.h"
+//#include "TestStubImp.h"
+#include "HelloStubMain.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 int main(int argc, char* argv[])
@@ -17,8 +18,10 @@ int main(int argc, char* argv[])
         Qt::QueuedConnection);
     engine.load(url);
 
-    TestStubImp* temp = new TestStubImp();
-    temp->Init();
+    HelloStubMain* stubInst = new HelloStubMain();
+    stubInst->Init();
+    //    TestStubImp* temp = new TestStubImp();
+    //    temp->Init();
 
     return app.exec();
 }

@@ -1,4 +1,5 @@
-#include "TestProxyImp.h"
+//#include "TestProxyImp.h"
+#include "HelloProxyMain.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 int main(int argc, char* argv[])
@@ -16,8 +17,12 @@ int main(int argc, char* argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
-    TestProxyImp* temp = new TestProxyImp();
-    temp->Init();
+
+    HelloProxyMain* proxyInst = new HelloProxyMain();
+    //    proxyInst->Init();
+    proxyInst->InitAsync();
+    //    TestProxyImp* temp = new TestProxyImp();
+    //    temp->Init();
 
     return app.exec();
 }

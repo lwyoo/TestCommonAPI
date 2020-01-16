@@ -13,11 +13,16 @@ INCLUDEPATH+= \
                 $$PWD/../src-gen \
 
 SOURCES += \
-    TestStubImp.cpp \
+    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
+    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
+    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
+    HelloStubImpl.cpp \
+    HelloStubMain.cpp \
+#    TestStubImp.cpp \
                 main.cpp \
-                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-                $$PWD/../src-gen/v1/proj/testcode/TestCodeStubDefault.cpp \
-                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusStubAdapter.cpp \
+#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
+#                $$PWD/../src-gen/v1/proj/testcode/TestCodeStubDefault.cpp \
+#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusStubAdapter.cpp \
 
 LIBS += \
                 -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt
@@ -27,4 +32,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    TestStubImp.h
+    HelloStubImpl.h \
+    HelloStubMain.h \
+#    TestStubImp.h

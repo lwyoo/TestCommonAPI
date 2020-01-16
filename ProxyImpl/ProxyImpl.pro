@@ -11,10 +11,13 @@ INCLUDEPATH+= \
                 $$PWD/../src-gen \
 
 SOURCES += \
-    TestProxyImp.cpp \
+#    TestProxyImp.cpp \
+    HelloProxyMain.cpp \
                 main.cpp \
-                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \
+                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
+                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
+#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
+#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \
 
 LIBS += \
                 -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt
@@ -27,4 +30,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    TestProxyImp.h
+ \#    TestProxyImp.h
+    HelloProxyMain.h
