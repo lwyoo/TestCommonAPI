@@ -29,6 +29,7 @@
 #include <CommonAPI/Struct.hpp>
 #include <cstdint>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include <mutex>
@@ -56,6 +57,11 @@ class HelloWorldStubAdapter
     ///Notifies all remote listeners about a change of value of the attribute a1.
     virtual void fireA1AttributeChanged(const ::v0::commonapi::examples::CommonTypes::a1Struct& a1) = 0;
 
+    /**
+    * Sends a broadcast event for myStatus. Should not be called directly.
+    * Instead, the "fire<broadcastName>Event" methods of the stub should be used.
+    */
+    virtual void fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus &_status) = 0;
 
 
     virtual void deactivateManagedInstances() = 0;
@@ -157,6 +163,12 @@ public:
 
     /// This is the method that will be called on remote calls on the method sayHello.
     virtual void sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply) = 0;
+    /// Sends a broadcast event for myStatus.
+    virtual void fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus &_status) {
+        auto stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+        if (stubAdapter)
+            stubAdapter->fireMyStatusEvent(_status);
+    }
 
     
     using CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::initStubAdapter;

@@ -62,6 +62,7 @@ public:
 
     COMMONAPI_EXPORT virtual void sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply);
 
+    COMMONAPI_EXPORT virtual void fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus &_status);
 
     
 protected:

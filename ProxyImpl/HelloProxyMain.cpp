@@ -163,6 +163,39 @@ void HelloProxyMain::testAttributeValue()
     });
 }
 
+bool HelloProxyMain::SubscribeBroadcast()
+{
+    static bool once = true;
+    bool ret = false;
+
+    if (true == once) {
+        if (nullptr == mMyProxy) {
+            QDebug(QtMsgType::QtInfoMsg) << "Proxy instance is nullptr!";
+            ret = false;
+        }
+
+        if (false == mMyProxy->isAvailable()) {
+            QDebug(QtMsgType::QtInfoMsg) << "Proxy instance is not available now!";
+            ret = false;
+        }
+
+        mMyProxy->getMyStatusEvent().subscribe(std::bind(&HelloProxyMain::cbMyStatus, this, std::placeholders::_1));
+        once = false;
+        ret = true;
+        QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << " success!";
+    }
+    return ret;
+}
+
+void HelloProxyMain::cbMyStatus(const CommonTypes::EnumMyStatus status)
+{
+    if (CommonTypes::EnumMyStatus::ENUM_STATUS_OK == status) {
+        QDebug(QtMsgType::QtInfoMsg) << "My Status OK!";
+    } else {
+        QDebug(QtMsgType::QtInfoMsg) << "My Status is not OK!";
+    }
+}
+
 void HelloProxyMain::XValueChanged(const int32_t& x)
 {
     QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << " x value changed to " << x;

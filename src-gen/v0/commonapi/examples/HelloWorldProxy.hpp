@@ -51,6 +51,12 @@ public:
         return delegate_->getA1Attribute();
     }
 
+    /**
+     * Returns the wrapper class that provides access to the broadcast myStatus.
+     */
+    virtual MyStatusEvent& getMyStatusEvent() {
+        return delegate_->getMyStatusEvent();
+    }
 
     /**
      * Calls sayHello with synchronous semantics.

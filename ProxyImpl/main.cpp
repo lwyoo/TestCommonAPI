@@ -21,6 +21,9 @@ int main(int argc, char* argv[])
     HelloProxyMain* proxyInst = new HelloProxyMain();
     //    proxyInst->Init();
     proxyInst->InitAsync();
+
+    proxyInst->SubscribeBroadcast();
+
     //    TestProxyImp* temp = new TestProxyImp();
     //    temp->Init();
 

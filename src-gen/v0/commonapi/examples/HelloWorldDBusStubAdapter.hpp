@@ -55,6 +55,8 @@ public:
 
     void fireA1AttributeChanged(const ::v0::commonapi::examples::CommonTypes::a1Struct& value);
 
+    void fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus& status);
+
     void deactivateManagedInstances() {
     }
 
@@ -95,6 +97,7 @@ public:
     
         > sayHelloStubDispatcher;
 
+
     HelloWorldDBusStubAdapterInternal(
         const CommonAPI::DBus::DBusAddress &_address,
         const std::shared_ptr<CommonAPI::DBus::DBusProxyConnection> &_connection,
@@ -134,6 +137,9 @@ protected:
             "</method>\n"
             "<signal name=\"onA1AttributeChanged\">\n"
             "<arg name=\"changedValue\" type=\"(s(ibd))\" />\n"
+            "</signal>\n"
+            "<signal name=\"myStatus\">\n"
+            "<arg name=\"status\" type=\"i\" />\n"
             "</signal>\n"
             "<method name=\"sayHello\">\n"
             "<arg name=\"_name\" type=\"s\" direction=\"in\" />\n"
@@ -248,6 +254,18 @@ void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireA1AttributeChanged
             "(s(ibd))",
             deployedValue
     
+    );
+}
+
+template <typename _Stub, typename... _Stubs>
+void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus& status) {
+    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<
+    ::v0::commonapi::examples::CommonTypes::EnumMyStatus
+    >>::sendSignal(
+            *this,
+            "myStatus",
+            "i",
+    status
     );
 }
 

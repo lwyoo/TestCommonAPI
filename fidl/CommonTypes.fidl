@@ -13,4 +13,12 @@ typeCollection CommonTypes {
 		Boolean b
 		Double d
 	}
+
+	enumeration EnumMyStatus
+	{
+		ENUM_STATUS_OK
+		ENUM_STATUS_FAIL
+		ENUM_STATUS_UNKNWON
+		ENUM_STATUS_MAX
+	}
 }

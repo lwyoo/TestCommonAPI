@@ -83,6 +83,46 @@ struct CommonTypes {
         }
     
     };
+    
+    struct EnumMyStatus : CommonAPI::Enumeration< int32_t> {
+        enum Literal : int32_t {
+            ENUM_STATUS_OK = 0,
+            ENUM_STATUS_FAIL = 1,
+            ENUM_STATUS_UNKNWON = 2,
+            ENUM_STATUS_MAX = 3
+        };
+    
+        EnumMyStatus()
+            : CommonAPI::Enumeration< int32_t>(static_cast< int32_t>(Literal::ENUM_STATUS_OK)) {}
+        EnumMyStatus(Literal _literal)
+            : CommonAPI::Enumeration< int32_t>(static_cast< int32_t>(_literal)) {}
+    
+        inline bool validate() const {
+            switch (value_) {
+                case static_cast< int32_t>(Literal::ENUM_STATUS_OK):
+                case static_cast< int32_t>(Literal::ENUM_STATUS_FAIL):
+                case static_cast< int32_t>(Literal::ENUM_STATUS_UNKNWON):
+                case static_cast< int32_t>(Literal::ENUM_STATUS_MAX):
+                return true;
+            default:
+                return false;
+            }
+        }
+    
+        inline bool operator==(const EnumMyStatus &_other) const { return (value_ == _other.value_); }
+        inline bool operator!=(const EnumMyStatus &_other) const { return (value_ != _other.value_); }
+        inline bool operator<=(const EnumMyStatus &_other) const { return (value_ <= _other.value_); }
+        inline bool operator>=(const EnumMyStatus &_other) const { return (value_ >= _other.value_); }
+        inline bool operator<(const EnumMyStatus &_other) const { return (value_ < _other.value_); }
+        inline bool operator>(const EnumMyStatus &_other) const { return (value_ > _other.value_); }
+    
+        inline bool operator==(const Literal &_value) const { return (value_ == static_cast< int32_t>(_value)); }
+        inline bool operator!=(const Literal &_value) const { return (value_ != static_cast< int32_t>(_value)); }
+        inline bool operator<=(const Literal &_value) const { return (value_ <= static_cast< int32_t>(_value)); }
+        inline bool operator>=(const Literal &_value) const { return (value_ >= static_cast< int32_t>(_value)); }
+        inline bool operator<(const Literal &_value) const { return (value_ < static_cast< int32_t>(_value)); }
+        inline bool operator>(const Literal &_value) const { return (value_ > static_cast< int32_t>(_value)); }
+    };
 
 
 
@@ -106,6 +146,13 @@ namespace CommonAPI {
 
 
 namespace std {
+    //Hash for EnumMyStatus
+    template<>
+    struct hash< ::v0::commonapi::examples::CommonTypes::EnumMyStatus> {
+        inline size_t operator()(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus& enumMyStatus) const {
+            return static_cast< int32_t>(enumMyStatus);
+        }
+    };
 }
 
 

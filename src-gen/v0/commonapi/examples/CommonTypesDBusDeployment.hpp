@@ -38,6 +38,8 @@ typedef CommonAPI::DBus::StructDeployment<
     CommonAPI::EmptyDeployment
 > a2StructDeployment_t;
 
+typedef CommonAPI::EmptyDeployment EnumMyStatusDeployment_t;
+
 
 // typecollection-specific deployments
 

@@ -16,4 +16,10 @@ interface HelloWorld {
 			String message
 		}
 	}
+
+	broadcast myStatus {
+		out {
+			EnumMyStatus status
+		}
+	}
 }

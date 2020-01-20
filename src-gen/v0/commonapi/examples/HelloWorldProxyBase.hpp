@@ -28,6 +28,7 @@
 #include <vector>
 
 #include <CommonAPI/Attribute.hpp>
+#include <CommonAPI/Event.hpp>
 #include <CommonAPI/Proxy.hpp>
 #include <functional>
 #include <future>
@@ -43,12 +44,16 @@ class HelloWorldProxyBase
 public:
     typedef CommonAPI::ObservableAttribute< int32_t> XAttribute;
     typedef CommonAPI::ObservableAttribute< ::v0::commonapi::examples::CommonTypes::a1Struct> A1Attribute;
+    typedef CommonAPI::Event<
+        ::v0::commonapi::examples::CommonTypes::EnumMyStatus
+    > MyStatusEvent;
 
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&)> SayHelloAsyncCallback;
 
     virtual XAttribute& getXAttribute() = 0;
     virtual A1Attribute& getA1Attribute() = 0;
 
+    virtual MyStatusEvent& getMyStatusEvent() = 0;
 
     virtual void sayHello(const std::string &_name, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info = nullptr) = 0;
     virtual std::future<CommonAPI::CallStatus> sayHelloAsync(const std::string &_name, SayHelloAsyncCallback _callback = nullptr, const CommonAPI::CallInfo *_info = nullptr) = 0;

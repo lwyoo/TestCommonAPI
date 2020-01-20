@@ -190,6 +190,12 @@ void HelloWorldStubDefault::sayHello(const std::shared_ptr<CommonAPI::ClientId> 
 }
 
 
+void HelloWorldStubDefault::fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus &_status) {
+    if (!_status.validate()) {
+        return;
+    }
+    HelloWorldStub::fireMyStatusEvent(_status);
+}
 
 
 HelloWorldStubDefault::RemoteEventHandler::RemoteEventHandler(HelloWorldStubDefault *_defaultStub)
