@@ -134,17 +134,17 @@ void HelloProxyMain::testAttributeValue()
     CommonAPI::CallStatus callStatus;
     int retXAttrValue = 0;
 
-    //    //get x attribute sync
-    //    mMyProxy->getXAttribute().getValue(callStatus, retXAttrValue);
-    //    if (callStatus == CommonAPI::CallStatus::SUCCESS) {
-    //        QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "Current Stub x Attr value = " << retXAttrValue;
-    //    }
-    //    //get x attribute async
-    //    mMyProxy->getXAttribute().getValueAsync([&](const CommonAPI::CallStatus& callStatus, int32_t x) {
-    //        if (callStatus == CommonAPI::CallStatus::SUCCESS) {
-    //            QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "get Stub x Attr value async = " << x;
-    //        }
-    //    });
+    //get x attribute sync
+    mMyProxy->getXAttribute().getValue(callStatus, retXAttrValue);
+    if (callStatus == CommonAPI::CallStatus::SUCCESS) {
+        QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "Current Stub x Attr value = " << retXAttrValue;
+    }
+    //get x attribute async
+    mMyProxy->getXAttribute().getValueAsync([&](const CommonAPI::CallStatus& callStatus, int32_t x) {
+        if (callStatus == CommonAPI::CallStatus::SUCCESS) {
+            QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "get Stub x Attr value async = " << x;
+        }
+    });
 
     int reqXAttrValue = 10;
     int settedXAttrValue = 0;
@@ -154,13 +154,13 @@ void HelloProxyMain::testAttributeValue()
         QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "request Sutb x Attr value = " << reqXAttrValue << ", and setted Stub x Attr value = " << settedXAttrValue;
     }
 
-    //    //set x attribute async
-    //    reqXAttrValue = 2020;
-    //    mMyProxy->getXAttribute().setValueAsync(reqXAttrValue, [&](const CommonAPI::CallStatus& callStatus, int32_t x) {
-    //        if (callStatus == CommonAPI::CallStatus::SUCCESS) {
-    //            QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "[Async]]setted Stub x Attr value = " << x;
-    //        }
-    //    });
+    //set x attribute async
+    reqXAttrValue = 2020;
+    mMyProxy->getXAttribute().setValueAsync(reqXAttrValue, [&](const CommonAPI::CallStatus& callStatus, int32_t x) {
+        if (callStatus == CommonAPI::CallStatus::SUCCESS) {
+            QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "[Async]]setted Stub x Attr value = " << x;
+        }
+    });
 }
 
 void HelloProxyMain::XValueChanged(const int32_t& x)
