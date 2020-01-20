@@ -1,7 +1,12 @@
 package commonapi.examples
 
+import commonapi.examples.CommonTypes.* from "CommonTypes.fidl"
+
 interface HelloWorld {
 	version { major 0 minor 1 }
+
+	attribute Int32 x
+	attribute a1Struct a1
 
 	method sayHello {
 		in {

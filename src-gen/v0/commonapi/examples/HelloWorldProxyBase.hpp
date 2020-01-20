@@ -13,13 +13,21 @@
 #include <v0/commonapi/examples/HelloWorld.hpp>
 
 
+#include <v0/commonapi/examples/CommonTypes.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
 #endif
 
+#include <CommonAPI/Deployment.hpp>
+#include <CommonAPI/InputStream.hpp>
+#include <CommonAPI/OutputStream.hpp>
+#include <CommonAPI/Struct.hpp>
+#include <cstdint>
+#include <string>
 #include <vector>
 
+#include <CommonAPI/Attribute.hpp>
 #include <CommonAPI/Proxy.hpp>
 #include <functional>
 #include <future>
@@ -33,9 +41,13 @@ namespace examples {
 class HelloWorldProxyBase
     : virtual public CommonAPI::Proxy {
 public:
+    typedef CommonAPI::ObservableAttribute< int32_t> XAttribute;
+    typedef CommonAPI::ObservableAttribute< ::v0::commonapi::examples::CommonTypes::a1Struct> A1Attribute;
 
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&)> SayHelloAsyncCallback;
 
+    virtual XAttribute& getXAttribute() = 0;
+    virtual A1Attribute& getA1Attribute() = 0;
 
 
     virtual void sayHello(const std::string &_name, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info = nullptr) = 0;

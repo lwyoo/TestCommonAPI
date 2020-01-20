@@ -13,7 +13,7 @@ INCLUDEPATH+= \
                 $$PWD/../src-gen \
 
 SOURCES += \
-    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
+#    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
     $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
     $$PWD/../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
     HelloStubImpl.cpp \

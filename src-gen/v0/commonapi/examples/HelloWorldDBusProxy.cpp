@@ -33,9 +33,17 @@ HelloWorldDBusProxy::HelloWorldDBusProxy(
     const CommonAPI::DBus::DBusAddress &_address,
     const std::shared_ptr<CommonAPI::DBus::DBusProxyConnection> &_connection)
     :   CommonAPI::DBus::DBusProxy(_address, _connection)
+,        x_(*this, "onXAttributeChanged", "setXAttribute", "i", "getXAttribute", static_cast< CommonAPI::DBus::IntegerDeployment* >(nullptr)),
+        a1_(*this, "onA1AttributeChanged", "setA1Attribute", "(s(ibd))", "getA1Attribute", static_cast< ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t* >(nullptr))
 {
 }
 
+      HelloWorldDBusProxy::XAttribute& HelloWorldDBusProxy::getXAttribute() {
+          return x_;
+      }
+      HelloWorldDBusProxy::A1Attribute& HelloWorldDBusProxy::getA1Attribute() {
+          return a1_;
+      }
 
 
     void HelloWorldDBusProxy::sayHello(const std::string &_name, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info) {

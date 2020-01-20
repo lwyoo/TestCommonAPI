@@ -17,6 +17,8 @@
 #define COMMONAPI_INTERNAL_COMPILATION
 #endif
 
+#include <CommonAPI/AttributeExtension.hpp>
+#include <CommonAPI/Factory.hpp>
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
@@ -36,6 +38,18 @@ public:
     typedef HelloWorld InterfaceType;
 
 
+    /**
+     * Returns the wrapper class that provides access to the attribute x.
+     */
+    virtual XAttribute& getXAttribute() {
+        return delegate_->getXAttribute();
+    }
+    /**
+     * Returns the wrapper class that provides access to the attribute a1.
+     */
+    virtual A1Attribute& getA1Attribute() {
+        return delegate_->getA1Attribute();
+    }
 
 
     /**
@@ -94,6 +108,46 @@ public:
 
 typedef HelloWorldProxy<> HelloWorldProxyDefault;
 
+namespace HelloWorldExtensions {
+    template <template <typename > class _ExtensionType>
+    class XAttributeExtension {
+     public:
+        typedef _ExtensionType< HelloWorldProxyBase::XAttribute> extension_type;
+    
+        static_assert(std::is_base_of<typename CommonAPI::AttributeExtension< HelloWorldProxyBase::XAttribute>, extension_type>::value,
+                      "Not CommonAPI Attribute Extension!");
+    
+        XAttributeExtension(HelloWorldProxyBase& proxy): attributeExtension_(proxy.getXAttribute()) {
+        }
+    
+        inline extension_type& getXAttributeExtension() {
+            return attributeExtension_;
+        }
+    
+     private:
+        extension_type attributeExtension_;
+    };
+
+    template <template <typename > class _ExtensionType>
+    class A1AttributeExtension {
+     public:
+        typedef _ExtensionType< HelloWorldProxyBase::A1Attribute> extension_type;
+    
+        static_assert(std::is_base_of<typename CommonAPI::AttributeExtension< HelloWorldProxyBase::A1Attribute>, extension_type>::value,
+                      "Not CommonAPI Attribute Extension!");
+    
+        A1AttributeExtension(HelloWorldProxyBase& proxy): attributeExtension_(proxy.getA1Attribute()) {
+        }
+    
+        inline extension_type& getA1AttributeExtension() {
+            return attributeExtension_;
+        }
+    
+     private:
+        extension_type attributeExtension_;
+    };
+
+} // namespace HelloWorldExtensions
 
 //
 // HelloWorldProxy Implementation
@@ -148,6 +202,16 @@ CommonAPI::InterfaceVersionAttribute& HelloWorldProxy<_AttributeExtensions...>::
 } // namespace commonapi
 } // namespace v0
 
+namespace CommonAPI {
+template<template<typename > class _AttributeExtension>
+struct DefaultAttributeProxyHelper< ::v0::commonapi::examples::HelloWorldProxy,
+    _AttributeExtension> {
+    typedef typename ::v0::commonapi::examples::HelloWorldProxy<
+            ::v0::commonapi::examples::HelloWorldExtensions::XAttributeExtension<_AttributeExtension>, 
+            ::v0::commonapi::examples::HelloWorldExtensions::A1AttributeExtension<_AttributeExtension>
+    > class_t;
+};
+}
 
 
 // Compatibility

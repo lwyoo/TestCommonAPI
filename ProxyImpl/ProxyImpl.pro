@@ -14,7 +14,7 @@ SOURCES += \
 #    TestProxyImp.cpp \
     HelloProxyMain.cpp \
                 main.cpp \
-                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
+#                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
                 $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \

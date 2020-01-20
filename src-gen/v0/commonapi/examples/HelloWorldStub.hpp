@@ -15,6 +15,7 @@
 
 
 
+#include <v0/commonapi/examples/CommonTypes.hpp>
 
 #include <v0/commonapi/examples/HelloWorld.hpp>
 
@@ -22,8 +23,15 @@
 #define COMMONAPI_INTERNAL_COMPILATION
 #endif
 
+#include <CommonAPI/Deployment.hpp>
+#include <CommonAPI/InputStream.hpp>
+#include <CommonAPI/OutputStream.hpp>
+#include <CommonAPI/Struct.hpp>
+#include <cstdint>
+#include <string>
 #include <vector>
 
+#include <mutex>
 
 #include <CommonAPI/Stub.hpp>
 
@@ -43,11 +51,29 @@ class HelloWorldStubAdapter
     : public virtual CommonAPI::StubAdapter,
       public virtual HelloWorld {
  public:
+    ///Notifies all remote listeners about a change of value of the attribute x.
+    virtual void fireXAttributeChanged(const int32_t& x) = 0;
+    ///Notifies all remote listeners about a change of value of the attribute a1.
+    virtual void fireA1AttributeChanged(const ::v0::commonapi::examples::CommonTypes::a1Struct& a1) = 0;
 
 
 
     virtual void deactivateManagedInstances() = 0;
 
+    void lockXAttribute(bool _lockAccess) {
+        if (_lockAccess) {
+            xMutex_.lock();
+        } else {
+            xMutex_.unlock();
+        }
+    }
+    void lockA1Attribute(bool _lockAccess) {
+        if (_lockAccess) {
+            a1Mutex_.lock();
+        } else {
+            a1Mutex_.unlock();
+        }
+    }
 
 protected:
     /**
@@ -55,6 +81,8 @@ protected:
      * subscribed to the selective broadcasts
      */
 
+    std::recursive_mutex xMutex_;
+    std::recursive_mutex a1Mutex_;
 };
 
 /**
@@ -74,6 +102,14 @@ class HelloWorldStubRemoteEvent
 public:
     virtual ~HelloWorldStubRemoteEvent() { }
 
+    /// Verification callback for remote set requests on the attribute x
+    virtual bool onRemoteSetXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _value) = 0;
+    /// Action callback for remote set requests on the attribute x
+    virtual void onRemoteXAttributeChanged() = 0;
+    /// Verification callback for remote set requests on the attribute a1
+    virtual bool onRemoteSetA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::commonapi::examples::CommonTypes::a1Struct _value) = 0;
+    /// Action callback for remote set requests on the attribute a1
+    virtual void onRemoteA1AttributeChanged() = 0;
 };
 
 /**
@@ -92,6 +128,32 @@ public:
     virtual const CommonAPI::Version& getInterfaceVersion(std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
     void lockInterfaceVersionAttribute(bool _lockAccess) { static_cast<void>(_lockAccess); }
 
+    /// Provides getter access to the attribute x
+    virtual const int32_t &getXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) = 0;
+    /// sets attribute with the given value and propagates it to the adapter
+    virtual void fireXAttributeChanged(int32_t _value) {
+    auto stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+    if (stubAdapter)
+        stubAdapter->fireXAttributeChanged(_value);
+    }
+    void lockXAttribute(bool _lockAccess) {
+        auto stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+        if (stubAdapter)
+            stubAdapter->lockXAttribute(_lockAccess);
+    }
+    /// Provides getter access to the attribute a1
+    virtual const ::v0::commonapi::examples::CommonTypes::a1Struct &getA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client) = 0;
+    /// sets attribute with the given value and propagates it to the adapter
+    virtual void fireA1AttributeChanged(::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+    auto stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+    if (stubAdapter)
+        stubAdapter->fireA1AttributeChanged(_value);
+    }
+    void lockA1Attribute(bool _lockAccess) {
+        auto stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+        if (stubAdapter)
+            stubAdapter->lockA1Attribute(_lockAccess);
+    }
 
     /// This is the method that will be called on remote calls on the method sayHello.
     virtual void sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply) = 0;

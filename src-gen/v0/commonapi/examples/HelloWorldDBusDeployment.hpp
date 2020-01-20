@@ -11,7 +11,9 @@
 #ifndef V0_COMMONAPI_EXAMPLES_Hello_World_DBUS_DEPLOYMENT_HPP_
 #define V0_COMMONAPI_EXAMPLES_Hello_World_DBUS_DEPLOYMENT_HPP_
 
+#include <v0/commonapi/examples/CommonTypesDBusDeployment.hpp>
 
+#include <v0/commonapi/examples/CommonTypesDBusDeployment.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION

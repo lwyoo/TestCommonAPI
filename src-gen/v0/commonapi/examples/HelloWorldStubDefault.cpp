@@ -29,6 +29,158 @@ HelloWorldStubRemoteEvent* HelloWorldStubDefault::initStubAdapter(const std::sha
     return &remoteEventHandler_;
 }
 
+ const int32_t& HelloWorldStubDefault::getXAttribute() {
+     return xAttributeValue_;
+ }
+
+ const int32_t& HelloWorldStubDefault::getXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) {
+     (void)_client;
+     return getXAttribute();
+ }
+
+ void HelloWorldStubDefault::setXAttribute(int32_t _value) {
+     std::shared_ptr<HelloWorldStubAdapter> stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter,
+     HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+     if(stubAdapter) {
+         stubAdapter->lockXAttribute(true);
+         const bool valueChanged = (xAttributeValue_ != _value);
+         if (valueChanged) {
+             xAttributeValue_ = std::move(_value);
+             fireXAttributeChanged(xAttributeValue_);
+         }
+         stubAdapter->lockXAttribute(false);
+     } else {
+         const bool valueChanged = trySetXAttribute(std::move(_value));
+         if (valueChanged) {
+             fireXAttributeChanged(xAttributeValue_);
+         }
+     }
+}
+
+ bool HelloWorldStubDefault::trySetXAttribute(int32_t _value) {
+     if (!validateXAttributeRequestedValue(_value))
+         return false;
+
+     bool valueChanged;
+     std::shared_ptr<HelloWorldStubAdapter> stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+     if(stubAdapter) {
+         stubAdapter->lockXAttribute(true);
+         valueChanged = (xAttributeValue_ != _value);
+         xAttributeValue_ = std::move(_value);
+         stubAdapter->lockXAttribute(false);
+     } else {
+         valueChanged = (xAttributeValue_ != _value);
+         xAttributeValue_ = std::move(_value);
+     }
+
+     return valueChanged;
+ }
+
+ bool HelloWorldStubDefault::validateXAttributeRequestedValue(const int32_t &_value) {
+     (void)_value;
+     return true;
+ }
+
+ void HelloWorldStubDefault::setXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _value) {
+     (void)_client;
+     setXAttribute(_value);
+ }
+
+ void HelloWorldStubDefault::onRemoteXAttributeChanged() {
+     // No operation in default
+ }
+
+ void HelloWorldStubDefault::RemoteEventHandler::onRemoteXAttributeChanged() {
+     assert(defaultStub_ !=NULL);
+     defaultStub_->onRemoteXAttributeChanged();
+ }
+
+ bool HelloWorldStubDefault::RemoteEventHandler::onRemoteSetXAttribute(int32_t _value) {
+     assert(defaultStub_ !=NULL);
+     return defaultStub_->trySetXAttribute(std::move(_value));
+ }
+
+ bool HelloWorldStubDefault::RemoteEventHandler::onRemoteSetXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _value) {
+     (void)_client;
+     return onRemoteSetXAttribute(_value);
+ }
+
+ const ::v0::commonapi::examples::CommonTypes::a1Struct& HelloWorldStubDefault::getA1Attribute() {
+     return a1AttributeValue_;
+ }
+
+ const ::v0::commonapi::examples::CommonTypes::a1Struct& HelloWorldStubDefault::getA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client) {
+     (void)_client;
+     return getA1Attribute();
+ }
+
+ void HelloWorldStubDefault::setA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+     std::shared_ptr<HelloWorldStubAdapter> stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter,
+     HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+     if(stubAdapter) {
+         stubAdapter->lockA1Attribute(true);
+         const bool valueChanged = (a1AttributeValue_ != _value);
+         if (valueChanged) {
+             a1AttributeValue_ = std::move(_value);
+             fireA1AttributeChanged(a1AttributeValue_);
+         }
+         stubAdapter->lockA1Attribute(false);
+     } else {
+         const bool valueChanged = trySetA1Attribute(std::move(_value));
+         if (valueChanged) {
+             fireA1AttributeChanged(a1AttributeValue_);
+         }
+     }
+}
+
+ bool HelloWorldStubDefault::trySetA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+     if (!validateA1AttributeRequestedValue(_value))
+         return false;
+
+     bool valueChanged;
+     std::shared_ptr<HelloWorldStubAdapter> stubAdapter = CommonAPI::Stub<HelloWorldStubAdapter, HelloWorldStubRemoteEvent>::stubAdapter_.lock();
+     if(stubAdapter) {
+         stubAdapter->lockA1Attribute(true);
+         valueChanged = (a1AttributeValue_ != _value);
+         a1AttributeValue_ = std::move(_value);
+         stubAdapter->lockA1Attribute(false);
+     } else {
+         valueChanged = (a1AttributeValue_ != _value);
+         a1AttributeValue_ = std::move(_value);
+     }
+
+     return valueChanged;
+ }
+
+ bool HelloWorldStubDefault::validateA1AttributeRequestedValue(const ::v0::commonapi::examples::CommonTypes::a1Struct &_value) {
+     (void)_value;
+     return true;
+ }
+
+ void HelloWorldStubDefault::setA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+     (void)_client;
+     setA1Attribute(_value);
+ }
+
+ void HelloWorldStubDefault::onRemoteA1AttributeChanged() {
+     // No operation in default
+ }
+
+ void HelloWorldStubDefault::RemoteEventHandler::onRemoteA1AttributeChanged() {
+     assert(defaultStub_ !=NULL);
+     defaultStub_->onRemoteA1AttributeChanged();
+ }
+
+ bool HelloWorldStubDefault::RemoteEventHandler::onRemoteSetA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+     assert(defaultStub_ !=NULL);
+     return defaultStub_->trySetA1Attribute(std::move(_value));
+ }
+
+ bool HelloWorldStubDefault::RemoteEventHandler::onRemoteSetA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::commonapi::examples::CommonTypes::a1Struct _value) {
+     (void)_client;
+     return onRemoteSetA1Attribute(_value);
+ }
+
 
 void HelloWorldStubDefault::sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply) {
     (void)_client;

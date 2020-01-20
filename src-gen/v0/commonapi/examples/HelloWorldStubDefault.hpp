@@ -51,15 +51,37 @@ public:
 
     COMMONAPI_EXPORT const CommonAPI::Version& getInterfaceVersion(std::shared_ptr<CommonAPI::ClientId> _client);
 
+    COMMONAPI_EXPORT virtual const int32_t& getXAttribute();
+    COMMONAPI_EXPORT virtual const int32_t& getXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client);
+    COMMONAPI_EXPORT virtual void setXAttribute(int32_t _value);
+    COMMONAPI_EXPORT virtual void setXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _value);
+    COMMONAPI_EXPORT virtual const ::v0::commonapi::examples::CommonTypes::a1Struct& getA1Attribute();
+    COMMONAPI_EXPORT virtual const ::v0::commonapi::examples::CommonTypes::a1Struct& getA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client);
+    COMMONAPI_EXPORT virtual void setA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value);
+    COMMONAPI_EXPORT virtual void setA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::commonapi::examples::CommonTypes::a1Struct _value);
 
     COMMONAPI_EXPORT virtual void sayHello(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _name, sayHelloReply_t _reply);
 
 
     
 protected:
+    COMMONAPI_EXPORT virtual bool trySetXAttribute(int32_t _value);
+    COMMONAPI_EXPORT virtual bool validateXAttributeRequestedValue(const int32_t &_value);
+    COMMONAPI_EXPORT virtual void onRemoteXAttributeChanged();
+    COMMONAPI_EXPORT virtual bool trySetA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value);
+    COMMONAPI_EXPORT virtual bool validateA1AttributeRequestedValue(const ::v0::commonapi::examples::CommonTypes::a1Struct &_value);
+    COMMONAPI_EXPORT virtual void onRemoteA1AttributeChanged();
     class COMMONAPI_EXPORT_CLASS_EXPLICIT RemoteEventHandler: public virtual HelloWorldStubRemoteEvent {
     public:
         COMMONAPI_EXPORT RemoteEventHandler(HelloWorldStubDefault *_defaultStub);
+
+        COMMONAPI_EXPORT virtual bool onRemoteSetXAttribute(int32_t _value);
+        COMMONAPI_EXPORT virtual bool onRemoteSetXAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _value);
+        COMMONAPI_EXPORT virtual void onRemoteXAttributeChanged();
+
+        COMMONAPI_EXPORT virtual bool onRemoteSetA1Attribute(::v0::commonapi::examples::CommonTypes::a1Struct _value);
+        COMMONAPI_EXPORT virtual bool onRemoteSetA1Attribute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::commonapi::examples::CommonTypes::a1Struct _value);
+        COMMONAPI_EXPORT virtual void onRemoteA1AttributeChanged();
 
 
     private:
@@ -70,6 +92,8 @@ protected:
 
 private:
 
+    int32_t xAttributeValue_ {};
+    ::v0::commonapi::examples::CommonTypes::a1Struct a1AttributeValue_ {};
 
     CommonAPI::Version interfaceVersion_;
 };

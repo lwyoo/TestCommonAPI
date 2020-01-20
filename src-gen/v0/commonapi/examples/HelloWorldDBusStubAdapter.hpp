@@ -12,6 +12,7 @@
 
 #include <v0/commonapi/examples/HelloWorldStub.hpp>
 #include "v0/commonapi/examples/HelloWorldDBusDeployment.hpp"
+#include <v0/commonapi/examples/CommonTypesDBusDeployment.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -50,6 +51,10 @@ public:
         return HelloWorld::getInterface();
     }
 
+    void fireXAttributeChanged(const int32_t& value);
+
+    void fireA1AttributeChanged(const ::v0::commonapi::examples::CommonTypes::a1Struct& value);
+
     void deactivateManagedInstances() {
     }
 
@@ -57,6 +62,28 @@ public:
         ::v0::commonapi::examples::HelloWorldStub,
         CommonAPI::Version
         > getHelloWorldInterfaceVersionStubDispatcher;
+
+    static CommonAPI::DBus::DBusGetAttributeStubDispatcher<
+            ::v0::commonapi::examples::HelloWorldStub,
+            int32_t,
+            CommonAPI::DBus::IntegerDeployment
+            > getXAttributeStubDispatcher;
+    static CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
+            ::v0::commonapi::examples::HelloWorldStub,
+            int32_t,
+            CommonAPI::DBus::IntegerDeployment
+            > setXAttributeStubDispatcher;
+
+    static CommonAPI::DBus::DBusGetAttributeStubDispatcher<
+            ::v0::commonapi::examples::HelloWorldStub,
+            ::v0::commonapi::examples::CommonTypes::a1Struct,
+            ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t
+            > getA1AttributeStubDispatcher;
+    static CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
+            ::v0::commonapi::examples::HelloWorldStub,
+            ::v0::commonapi::examples::CommonTypes::a1Struct,
+            ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t
+            > setA1AttributeStubDispatcher;
 
     
     static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
@@ -74,6 +101,10 @@ public:
         const std::shared_ptr<_Stub> &_stub)
     : CommonAPI::DBus::DBusStubAdapter(_address, _connection,false),
       HelloWorldDBusStubAdapterHelper(_address, _connection, false, _stub) {
+        HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "getXAttribute", "" }, &getXAttributeStubDispatcher);
+        HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "setXAttribute", "i" }, &setXAttributeStubDispatcher);
+        HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "getA1Attribute", "" }, &getA1AttributeStubDispatcher);
+        HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "setA1Attribute", "(s(ibd))" }, &setA1AttributeStubDispatcher);
         HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "sayHello", "s" }, &sayHelloStubDispatcher);
         HelloWorldDBusStubAdapterHelper::addStubDispatcher({ "getInterfaceVersion", "" }, &getHelloWorldInterfaceVersionStubDispatcher);
     }
@@ -84,6 +115,26 @@ protected:
             "<method name=\"getInterfaceVersion\">\n"
                 "<arg name=\"value\" type=\"uu\" direction=\"out\" />"
             "</method>\n"
+            "<method name=\"getXAttribute\">\n"
+            "<arg name=\"value\" type=\"i\" direction=\"out\" />"
+            "</method>\n"
+            "<method name=\"setXAttribute\">\n"
+            "<arg name=\"requestedValue\" type=\"i\" direction=\"in\" />\n"
+            "<arg name=\"setValue\" type=\"i\" direction=\"out\" />\n"
+            "</method>\n"
+            "<signal name=\"onXAttributeChanged\">\n"
+            "<arg name=\"changedValue\" type=\"i\" />\n"
+            "</signal>\n"
+            "<method name=\"getA1Attribute\">\n"
+            "<arg name=\"value\" type=\"(s(ibd))\" direction=\"out\" />"
+            "</method>\n"
+            "<method name=\"setA1Attribute\">\n"
+            "<arg name=\"requestedValue\" type=\"(s(ibd))\" direction=\"in\" />\n"
+            "<arg name=\"setValue\" type=\"(s(ibd))\" direction=\"out\" />\n"
+            "</method>\n"
+            "<signal name=\"onA1AttributeChanged\">\n"
+            "<arg name=\"changedValue\" type=\"(s(ibd))\" />\n"
+            "</signal>\n"
             "<method name=\"sayHello\">\n"
             "<arg name=\"_name\" type=\"s\" direction=\"in\" />\n"
             "<arg name=\"_message\" type=\"s\" direction=\"out\" />\n"
@@ -102,6 +153,54 @@ CommonAPI::DBus::DBusGetAttributeStubDispatcher<
     CommonAPI::Version
     > HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::getHelloWorldInterfaceVersionStubDispatcher(&HelloWorldStub::lockInterfaceVersionAttribute, &HelloWorldStub::getInterfaceVersion, "uu");
 
+template <typename _Stub, typename... _Stubs>
+CommonAPI::DBus::DBusGetAttributeStubDispatcher<
+        ::v0::commonapi::examples::HelloWorldStub,
+        int32_t,
+        CommonAPI::DBus::IntegerDeployment
+        > HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::getXAttributeStubDispatcher(
+            &::v0::commonapi::examples::HelloWorldStub::lockXAttribute,
+            &::v0::commonapi::examples::HelloWorldStub::getXAttribute
+            , "i"
+            );
+template <typename _Stub, typename... _Stubs>
+CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
+        ::v0::commonapi::examples::HelloWorldStub,
+        int32_t,
+        CommonAPI::DBus::IntegerDeployment
+        > HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::setXAttributeStubDispatcher(
+                &::v0::commonapi::examples::HelloWorldStub::lockXAttribute,
+                &::v0::commonapi::examples::HelloWorldStub::getXAttribute,
+                &HelloWorldStubRemoteEvent::onRemoteSetXAttribute,
+                &HelloWorldStubRemoteEvent::onRemoteXAttributeChanged
+                ,&HelloWorldStubAdapter::fireXAttributeChanged
+                ,"i"
+                );
+
+template <typename _Stub, typename... _Stubs>
+CommonAPI::DBus::DBusGetAttributeStubDispatcher<
+        ::v0::commonapi::examples::HelloWorldStub,
+        ::v0::commonapi::examples::CommonTypes::a1Struct,
+        ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t
+        > HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::getA1AttributeStubDispatcher(
+            &::v0::commonapi::examples::HelloWorldStub::lockA1Attribute,
+            &::v0::commonapi::examples::HelloWorldStub::getA1Attribute
+            , "(s(ibd))"
+            );
+template <typename _Stub, typename... _Stubs>
+CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
+        ::v0::commonapi::examples::HelloWorldStub,
+        ::v0::commonapi::examples::CommonTypes::a1Struct,
+        ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t
+        > HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::setA1AttributeStubDispatcher(
+                &::v0::commonapi::examples::HelloWorldStub::lockA1Attribute,
+                &::v0::commonapi::examples::HelloWorldStub::getA1Attribute,
+                &HelloWorldStubRemoteEvent::onRemoteSetA1Attribute,
+                &HelloWorldStubRemoteEvent::onRemoteA1AttributeChanged
+                ,&HelloWorldStubAdapter::fireA1AttributeChanged
+                ,"(s(ibd))"
+                );
+
 
 template <typename _Stub, typename... _Stubs>
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
@@ -115,6 +214,42 @@ CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     &HelloWorldStub::sayHello, "s",
     std::make_tuple(static_cast< CommonAPI::DBus::StringDeployment* >(nullptr)),
     std::make_tuple(static_cast< CommonAPI::DBus::StringDeployment* >(nullptr)));
+
+template <typename _Stub, typename... _Stubs>
+void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireXAttributeChanged(const int32_t& value) {
+    CommonAPI::Deployable< int32_t, CommonAPI::DBus::IntegerDeployment> deployedValue(value, static_cast< CommonAPI::DBus::IntegerDeployment* >(nullptr));
+    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<
+    CommonAPI::Deployable<
+        int32_t,
+        CommonAPI::DBus::IntegerDeployment
+    >
+    >>
+        ::sendSignal(
+            *this,
+            "onXAttributeChanged",
+            "i",
+            deployedValue
+    
+    );
+}
+
+template <typename _Stub, typename... _Stubs>
+void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireA1AttributeChanged(const ::v0::commonapi::examples::CommonTypes::a1Struct& value) {
+    CommonAPI::Deployable< ::v0::commonapi::examples::CommonTypes::a1Struct, ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t> deployedValue(value, static_cast< ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t* >(nullptr));
+    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<
+    CommonAPI::Deployable<
+        ::v0::commonapi::examples::CommonTypes::a1Struct,
+        ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t
+    >
+    >>
+        ::sendSignal(
+            *this,
+            "onA1AttributeChanged",
+            "(s(ibd))",
+            deployedValue
+    
+    );
+}
 
 
 template <typename _Stub = ::v0::commonapi::examples::HelloWorldStub, typename... _Stubs>

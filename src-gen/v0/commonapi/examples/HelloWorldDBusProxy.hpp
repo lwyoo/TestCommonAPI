@@ -21,6 +21,7 @@
 #include <CommonAPI/DBus/DBusFactory.hpp>
 #include <CommonAPI/DBus/DBusProxy.hpp>
 #include <CommonAPI/DBus/DBusAddressTranslator.hpp>
+#include <CommonAPI/DBus/DBusAttribute.hpp>
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
@@ -52,6 +53,8 @@ public:
 
     virtual ~HelloWorldDBusProxy() { }
 
+    virtual XAttribute& getXAttribute();
+    virtual A1Attribute& getA1Attribute();
 
 
     virtual void sayHello(const std::string &_name, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info);
@@ -62,6 +65,8 @@ public:
 
 private:
 
+    CommonAPI::DBus::DBusObservableAttribute<CommonAPI::DBus::DBusAttribute<XAttribute, CommonAPI::DBus::IntegerDeployment>> x_;
+    CommonAPI::DBus::DBusObservableAttribute<CommonAPI::DBus::DBusAttribute<A1Attribute, ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t>> a1_;
 
 
 };
