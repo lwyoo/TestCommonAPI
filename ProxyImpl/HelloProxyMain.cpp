@@ -76,12 +76,13 @@ void HelloProxyMain::callbackConnectionStatusChanged(CommonAPI::AvailabilityStat
 
         const std::string name = "World";
         CommonAPI::CallStatus callStatus;
-        std::string returnMessage;
+        std::string returnMessage = "";
 
+        CommonAPI::CallInfo callInfo(10000);
         QElapsedTimer timer;
         // method sync call
         timer.start();
-        mMyProxy->sayHello(name, callStatus, returnMessage);
+        mMyProxy->sayHello(name, callStatus, returnMessage, &callInfo);
         double elapsedSec = static_cast<double>(timer.elapsed()) / 1000.;
         std::cout << "sayHello() sync called! Time : " << elapsedSec << " sec elapsed." << std::endl;
 
@@ -93,7 +94,7 @@ void HelloProxyMain::callbackConnectionStatusChanged(CommonAPI::AvailabilityStat
 
         //method aync call
         timer.restart();
-        mMyProxy->sayHelloAsync("World Async", &sayHelloAsyncCallback);
+        mMyProxy->sayHelloAsync("World Async", &sayHelloAsyncCallback, &callInfo);
         std::cout << "sayHello() async called! Time : " << timer.elapsed() << " milliseconds elapsed." << std::endl;
 
         //attribute test
