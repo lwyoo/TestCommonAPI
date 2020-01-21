@@ -7,10 +7,12 @@
 class HelloStubMain {
 public:
     HelloStubMain();
+
+    static int dltInjCBUpdateXAttr(uint32_t service_id, void* data, uint32_t length);
     void Init();
 
 private:
-    std::shared_ptr<HelloStubImpl> mMyService;
+    static std::shared_ptr<HelloStubImpl> mMyService;
 };
 
 #endif // HELLOIMPL_H

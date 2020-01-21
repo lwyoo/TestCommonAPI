@@ -1,20 +1,41 @@
 #include "HelloStubMain.h"
 #include <QtDebug>
-#include <thread>'
+#include <dlt/dlt.h>
+#include <thread>
+
+DLT_DECLARE_CONTEXT(ContextStub)
+
+std::shared_ptr<HelloStubImpl> HelloStubMain::mMyService = std::make_shared<HelloStubImpl>();
 
 HelloStubMain::HelloStubMain()
-    : mMyService(nullptr)
 {
+}
+
+int HelloStubMain::dltInjCBUpdateXAttr(uint32_t service_id, void* data, uint32_t length)
+{
+    DLT_LOG(ContextStub, DLT_LOG_WARN, DLT_STRING("11111111111111111111111111111111111111111111111111111111111"));
+    if (data == nullptr || length == 0) {
+        DLT_LOG(ContextStub, DLT_LOG_WARN, DLT_STRING("Invalid Command"));
+
+        return -1;
+    }
+
+    //    DLT_LOG(ContextStub, DLT_LOG_INFO, DLT_STRING("service id : "), DLT_UINT(service_id), DLT_STRING(" length : "), DLT_UINT(length));
+
+    return 0;
 }
 
 void HelloStubMain::Init()
 {
+    DLT_REGISTER_APP("Stub", "stub application");
+    DLT_REGISTER_CONTEXT(ContextStub, "sapp", "stub context");
+    DLT_REGISTER_INJECTION_CALLBACK(ContextStub, 0xfff, &dltInjCBUpdateXAttr);
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
     std::string domain = "local";
     std::string instance = "commonapi.examples.HelloWorld";
     std::string connection = "service-sample";
 
-    mMyService = std::make_shared<HelloStubImpl>();
+    //    mMyService = std::make_shared<HelloStubImpl>();
 
     bool bRegisterService = runtime->registerService(domain, instance, mMyService, connection);
 
