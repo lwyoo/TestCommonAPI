@@ -17,7 +17,9 @@ SOURCES += \
     MyQuickItemProxy.cpp \
 #                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
                 $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
-    main.cpp
+    main.cpp \
+    squircle.cpp \
+    squirclerenderer.cpp
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
  #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \
 
@@ -35,4 +37,6 @@ HEADERS += \
     MainWindowProxy.h \
     MyQuickItemProxy.h \
  \#    TestProxyImp.h
-    HelloProxyMain.h
+    HelloProxyMain.h \
+    squircle.h \
+    squirclerenderer.h
