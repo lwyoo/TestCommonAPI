@@ -57,6 +57,8 @@ public:
 
     void fireMyStatusEvent(const ::v0::commonapi::examples::CommonTypes::EnumMyStatus& status);
 
+    void fireMyEventEvent(const int32_t& myValue);
+
     void deactivateManagedInstances() {
     }
 
@@ -96,6 +98,7 @@ public:
         std::tuple< CommonAPI::DBus::StringDeployment>
     
         > sayHelloStubDispatcher;
+
 
 
     HelloWorldDBusStubAdapterInternal(
@@ -140,6 +143,9 @@ protected:
             "</signal>\n"
             "<signal name=\"myStatus\">\n"
             "<arg name=\"status\" type=\"i\" />\n"
+            "</signal>\n"
+            "<signal name=\"myEvent\">\n"
+            "<arg name=\"myValue\" type=\"i\" />\n"
             "</signal>\n"
             "<method name=\"sayHello\">\n"
             "<arg name=\"_name\" type=\"s\" direction=\"in\" />\n"
@@ -266,6 +272,18 @@ void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireMyStatusEvent(cons
             "myStatus",
             "i",
     status
+    );
+}
+
+template <typename _Stub, typename... _Stubs>
+void HelloWorldDBusStubAdapterInternal<_Stub, _Stubs...>::fireMyEventEvent(const int32_t& myValue) {
+    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<
+    CommonAPI::Deployable< int32_t, CommonAPI::DBus::IntegerDeployment>
+    >>::sendSignal(
+            *this,
+            "myEvent",
+            "i",
+    CommonAPI::Deployable< int32_t, CommonAPI::DBus::IntegerDeployment>(myValue, static_cast< CommonAPI::DBus::IntegerDeployment* >(nullptr))
     );
 }
 

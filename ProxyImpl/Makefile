@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = ProxyImpl1.0.0
-DISTDIR = /home/ldg/QtExample/TestComonAPI/ProxyImpl/.tmp/ProxyImpl1.0.0
+DISTDIR = /home/ldg/QtExample/study/TestCommonAPI/ProxyImpl/.tmp/ProxyImpl1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt/5.12.3/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt -L/opt/Qt/5.12.3/gcc_64/lib -lQt5Quick -lQt5Gui -lQt5Qml -lQt5Network -lQt5Core -lGL -lpthread   
@@ -52,14 +52,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = TestProxyImp.cpp \
+SOURCES       = HelloProxyMain.cpp \
 		main.cpp \
-		../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-		../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp qrc_qml.cpp
-OBJECTS       = TestProxyImp.o \
+		../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp qrc_qml.cpp
+OBJECTS       = HelloProxyMain.o \
 		main.o \
-		TestCodeDBusDeployment.o \
-		TestCodeDBusProxy.o \
+		HelloWorldDBusProxy.o \
 		qrc_qml.o
 DIST          = /opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/common/unix.conf \
@@ -164,6 +162,16 @@ DIST          = /opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qmltest_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -253,10 +261,9 @@ DIST          = /opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
-		ProxyImpl.pro TestProxyImp.h TestProxyImp.cpp \
+		ProxyImpl.pro HelloProxyMain.h HelloProxyMain.cpp \
 		main.cpp \
-		../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-		../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp
+		../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp
 QMAKE_TARGET  = ProxyImpl
 DESTDIR       = 
 TARGET        = ProxyImpl
@@ -371,6 +378,16 @@ Makefile: ProxyImpl.pro /opt/Qt/5.12.3/gcc_64/mkspecs/linux-g++/qmake.conf /opt/
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qmltest_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils.pri \
+		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick_private.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -571,6 +588,16 @@ Makefile: ProxyImpl.pro /opt/Qt/5.12.3/gcc_64/mkspecs/linux-g++/qmake.conf /opt/
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qmltest_private.pri:
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3d_private.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3drender_private.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils.pri:
+/opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick3dutils_private.pri:
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quick_private.pri:
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2.pri:
 /opt/Qt/5.12.3/gcc_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
@@ -683,8 +710,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents TestProxyImp.h $(DISTDIR)/
-	$(COPY_FILE) --parents TestProxyImp.cpp main.cpp ../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp ../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents HelloProxyMain.h $(DISTDIR)/
+	$(COPY_FILE) --parents HelloProxyMain.cpp main.cpp ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -737,14 +764,20 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean
 
 ####### Compile
 
-TestProxyImp.o: TestProxyImp.cpp TestProxyImp.h \
-		../src-gen/v1/proj/testcode/TestCodeProxy.hpp \
-		../src-gen/v1/proj/testcode/TestCodeProxyBase.hpp \
-		../src-gen/v1/proj/testcode/TestCode.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+HelloProxyMain.o: HelloProxyMain.cpp HelloProxyMain.h \
+		../src-gen/v0/commonapi/examples/HelloWorldProxy.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
+		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Variant.hpp \
@@ -758,12 +791,7 @@ TestProxyImp.o: TestProxyImp.cpp TestProxyImp.h \
 		/opt/GENIVI/include/dlt/dlt_user_macros.h \
 		/opt/GENIVI/include/dlt/dlt_version.h \
 		/opt/GENIVI/include/dlt/dlt_shm.h \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Attribute.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CallInfo.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Config.hpp \
@@ -771,10 +799,113 @@ TestProxyImp.o: TestProxyImp.cpp TestProxyImp.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/AttributeExtension.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TestProxyImp.o TestProxyImp.cpp
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/MainLoopContext.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/QElapsedTimer \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qelapsedtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloProxyMain.o HelloProxyMain.cpp
 
-main.o: main.cpp /opt/Qt/5.12.3/gcc_64/include/QtGui/QGuiApplication \
+main.o: main.cpp HelloProxyMain.h \
+		../src-gen/v0/commonapi/examples/HelloWorldProxy.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
+		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Variant.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Logger.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/LoggerImpl.hpp \
+		/opt/GENIVI/include/dlt/dlt.h \
+		/opt/GENIVI/include/dlt/dlt_common.h \
+		/opt/GENIVI/include/dlt/dlt_types.h \
+		/opt/GENIVI/include/dlt/dlt_protocol.h \
+		/opt/GENIVI/include/dlt/dlt_user.h \
+		/opt/GENIVI/include/dlt/dlt_user_macros.h \
+		/opt/GENIVI/include/dlt/dlt_version.h \
+		/opt/GENIVI/include/dlt/dlt_shm.h \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Attribute.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CallInfo.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Config.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Proxy.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/AttributeExtension.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
+		/opt/Qt/5.12.3/gcc_64/include/QtGui/QGuiApplication \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qguiapplication.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -868,19 +999,19 @@ main.o: main.cpp /opt/Qt/5.12.3/gcc_64/include/QtGui/QGuiApplication \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlerror.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-TestCodeDBusDeployment.o: ../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp ../src-gen/v1/proj/testcode/TestCodeDBusDeployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusDeployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TestCodeDBusDeployment.o ../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp
-
-TestCodeDBusProxy.o: ../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp ../src-gen/v1/proj/testcode/TestCodeDBusProxy.hpp \
-		../src-gen/v1/proj/testcode/TestCodeProxyBase.hpp \
-		../src-gen/v1/proj/testcode/TestCode.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+HelloWorldDBusProxy.o: ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
+		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Variant.hpp \
@@ -894,18 +1025,14 @@ TestCodeDBusProxy.o: ../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp ../src-ge
 		/opt/GENIVI/include/dlt/dlt_user_macros.h \
 		/opt/GENIVI/include/dlt/dlt_version.h \
 		/opt/GENIVI/include/dlt/dlt_shm.h \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Attribute.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CallInfo.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Config.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Proxy.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
-		../src-gen/v1/proj/testcode/TestCodeDBusDeployment.hpp \
+		../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.hpp \
+		../src-gen/v0/commonapi/examples/CommonTypesDBusDeployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusDeployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddress.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFactory.hpp \
@@ -955,7 +1082,7 @@ TestCodeDBusProxy.o: ../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp ../src-ge
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusObjectManagerStub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusInterfaceHandler.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddressTranslator.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TestCodeDBusProxy.o ../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloWorldDBusProxy.o ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp

@@ -13,6 +13,7 @@ public:
 
     //fidl broadcast
     void fireMyStatusEventCB(v0::commonapi::examples::CommonTypes::EnumMyStatus& _status);
+    void fireMyEventEvent(const int32_t& _myValue) override;
 };
 
 #endif // HELLOSTUBIMPL_H

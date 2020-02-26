@@ -19,6 +19,8 @@ SOURCES += \
     HelloStubImpl.cpp \
     HelloStubMain.cpp \
 #    TestStubImp.cpp \
+    MainWindowStub.cpp \
+    MyQuickItem.cpp \
                 main.cpp \
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeStubDefault.cpp \
@@ -34,4 +36,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     HelloStubImpl.h \
     HelloStubMain.h \
-#    TestStubImp.h
+    MyQuickItem.h \
+ \#    TestStubImp.h
+    MainWindowStub.h
+
+DISTFILES += \
+    ../fidl/CommonTypes.fidl \
+    ../fidl/hello.fidl

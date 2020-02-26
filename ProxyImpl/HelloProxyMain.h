@@ -25,6 +25,7 @@ private:
     void testAttributeValue();
     //fidl callback func
     void cbMyStatus(const CommonTypes::EnumMyStatus status);
+    void callbackMyEventChanged(const int32_t& myValue);
 
 private:
     std::shared_ptr<v0::commonapi::examples::HelloWorldProxyDefault> mMyProxy;

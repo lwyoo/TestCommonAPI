@@ -59,6 +59,7 @@ void HelloProxyMain::InitAsync()
     mMyProxy = CommonAPI::Runtime::get()->buildProxy<v0::commonapi::examples::HelloWorldProxy>(domain, instance, connection);
 
     if (nullptr != mMyProxy) {
+        std::cerr << "build proxy!" << std::endl;
         mMyProxy->getProxyStatusEvent().subscribe(std::bind(&HelloProxyMain::callbackConnectionStatusChanged, this, std::placeholders::_1));
     } else {
         std::cerr << "Can't build proxy!" << std::endl;
@@ -73,6 +74,7 @@ void HelloProxyMain::callbackConnectionStatusChanged(CommonAPI::AvailabilityStat
 
         //fidl attribute init
         bool bAttrSubscription = SubscribeStubAttributeChagedEvent();
+        SubscribeBroadcast();
 
         const std::string name = "World";
         CommonAPI::CallStatus callStatus;
@@ -106,6 +108,11 @@ void HelloProxyMain::callbackConnectionStatusChanged(CommonAPI::AvailabilityStat
     }
 }
 
+void HelloProxyMain::callbackMyEventChanged(const int32_t& myValue)
+{
+    qDebug() << Q_FUNC_INFO << "proxy myValue : " << myValue;
+}
+
 bool HelloProxyMain::SubscribeStubAttributeChagedEvent()
 {
     static bool once = true;
@@ -123,6 +130,7 @@ bool HelloProxyMain::SubscribeStubAttributeChagedEvent()
         }
 
         mMyProxy->getXAttribute().getChangedEvent().subscribe(std::bind(&HelloProxyMain::XValueChanged, this, std::placeholders::_1));
+
         once = false;
         ret = true;
         QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << " success!";
@@ -166,6 +174,7 @@ void HelloProxyMain::testAttributeValue()
 
 bool HelloProxyMain::SubscribeBroadcast()
 {
+    QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO;
     static bool once = true;
     bool ret = false;
 
@@ -180,7 +189,9 @@ bool HelloProxyMain::SubscribeBroadcast()
             ret = false;
         }
 
+        QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << "broadcast callback setting~~~~~~~~~~~~~~~";
         mMyProxy->getMyStatusEvent().subscribe(std::bind(&HelloProxyMain::cbMyStatus, this, std::placeholders::_1));
+        mMyProxy->getMyEventEvent().subscribe(std::bind(&HelloProxyMain::callbackMyEventChanged, this, std::placeholders::_1));
         once = false;
         ret = true;
         QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << " success!";

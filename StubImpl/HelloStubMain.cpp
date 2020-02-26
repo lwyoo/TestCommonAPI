@@ -1,6 +1,6 @@
 #include "HelloStubMain.h"
 #include <QtDebug>
-#include <thread>'
+#include <thread>
 
 HelloStubMain::HelloStubMain()
     : mMyService(nullptr)
@@ -24,11 +24,29 @@ void HelloStubMain::Init()
 
     if (true == bRegisterService) {
         //fire MyStatus OK
+        qDebug() << Q_FUNC_INFO << "Register Service [Connected]";
         CommonTypes::EnumMyStatus status(CommonTypes::EnumMyStatus::ENUM_STATUS_OK);
         mMyService->fireMyStatusEventCB(status);
     } else {
+        qDebug() << Q_FUNC_INFO << "Register Service [DisConnected]";
         //fire MyStatus Fail
         CommonTypes::EnumMyStatus status(CommonTypes::EnumMyStatus::ENUM_STATUS_FAIL);
         mMyService->fireMyStatusEventCB(status);
     }
+}
+
+void HelloStubMain::testFunction()
+{
+    //    qDebug() << Q_FUNC_INFO << 1;
+    //    CommonTypes::EnumMyStatus status(CommonTypes::EnumMyStatus::ENUM_STATUS_OK);
+    //    qDebug() << Q_FUNC_INFO << 2;
+    //    if (mMyService != nullptr) {
+    //        qDebug() << Q_FUNC_INFO << 3;
+    //        mMyService->fireMyStatusEventCB(status);
+    //    } else {
+    //        qDebug() << Q_FUNC_INFO << "errer";
+    //    }
+
+    mMyService->fireMyEventEvent(mMyValue++);
+    qDebug() << Q_FUNC_INFO << "mMyValue : " << mMyValue;
 }

@@ -35,7 +35,8 @@ HelloWorldDBusProxy::HelloWorldDBusProxy(
     :   CommonAPI::DBus::DBusProxy(_address, _connection)
 ,        x_(*this, "onXAttributeChanged", "setXAttribute", "i", "getXAttribute", static_cast< CommonAPI::DBus::IntegerDeployment* >(nullptr)),
         a1_(*this, "onA1AttributeChanged", "setA1Attribute", "(s(ibd))", "getA1Attribute", static_cast< ::v0::commonapi::examples::CommonTypes_::a1StructDeployment_t* >(nullptr))
-,        myStatus_(*this, "myStatus", "i", std::make_tuple(static_cast< CommonAPI::EmptyDeployment* >(nullptr)))
+,        myStatus_(*this, "myStatus", "i", std::make_tuple(static_cast< CommonAPI::EmptyDeployment* >(nullptr))),
+        myEvent_(*this, "myEvent", "i", std::make_tuple(static_cast< CommonAPI::DBus::IntegerDeployment* >(nullptr)))
 {
 }
 
@@ -48,6 +49,9 @@ HelloWorldDBusProxy::HelloWorldDBusProxy(
 
 HelloWorldDBusProxy::MyStatusEvent& HelloWorldDBusProxy::getMyStatusEvent() {
     return myStatus_;
+}
+HelloWorldDBusProxy::MyEventEvent& HelloWorldDBusProxy::getMyEventEvent() {
+    return myEvent_;
 }
 
     void HelloWorldDBusProxy::sayHello(const std::string &_name, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info) {

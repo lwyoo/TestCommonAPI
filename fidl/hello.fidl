@@ -22,4 +22,10 @@ interface HelloWorld {
 			EnumMyStatus status
 		}
 	}
+
+        broadcast myEvent {
+            out {
+                    Int32 myValue
+            }
+        }
 }

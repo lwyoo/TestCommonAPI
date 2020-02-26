@@ -24,3 +24,10 @@ void HelloStubImpl::fireMyStatusEventCB(v0::commonapi::examples::CommonTypes::En
     _status = CommonTypes::EnumMyStatus::ENUM_STATUS_OK;
     HelloWorldStubDefault::fireMyStatusEvent(_status);
 }
+
+void HelloStubImpl::fireMyEventEvent(const int32_t& _myValue)
+{
+    QDebug(QtMsgType::QtInfoMsg) << Q_FUNC_INFO << " called!";
+
+    HelloWorldStubDefault::fireMyEventEvent(_myValue);
+}
