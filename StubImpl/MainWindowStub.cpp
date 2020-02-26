@@ -1,5 +1,5 @@
 #include "MainWindowStub.h"
-#include "MyQuickItem.h"
+#include "MyQuickItemStub.h"
 #define SCREEN_INFO_X 0
 #define SCREEN_INFO_Y 0
 #define SCREEN_INFO_WIDTH 1000
@@ -32,7 +32,7 @@ void MainWindowStub::findChiledItem(const QString objectName)
 
 void MainWindowStub::destroyTest()
 {
-    MyQuickItem::instance()->destroyTest();
+    MyQuickItemStub::instance()->destroyTest();
 }
 
 MainWindowStub::MainWindowStub(QQuickView* parent)
@@ -45,5 +45,5 @@ MainWindowStub::MainWindowStub(QQuickView* parent)
     this->setMaximumSize(QSize(SCREEN_INFO_WIDTH, SCREEN_INFO_HEIGHT));
 
     rootContext()->setContextProperty("MainWindowStub", this);
-    this->rootContext()->setContextProperty("MyQuickItem", MyQuickItem::instance().data());
+    this->rootContext()->setContextProperty("MyQuickItemStub", MyQuickItemStub::instance().data());
 }

@@ -14,6 +14,7 @@ public:
 
 private:
     explicit MainWindowStub(QQuickView* parent = nullptr);
+    int mVaue;
 
 public slots:
 };

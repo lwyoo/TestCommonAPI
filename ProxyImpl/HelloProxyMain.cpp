@@ -1,11 +1,11 @@
 #include "HelloProxyMain.h"
+#include "MyQuickItemProxy.h"
 #include <CommonAPI/CommonAPI.hpp>
 #include <QDebug>
 #include <QElapsedTimer>
 #include <iostream>
 #include <string>
 #include <unistd.h>
-
 void sayHelloAsyncCallback(const CommonAPI::CallStatus& callStatus, const std::string& returnMessage)
 {
     if (callStatus != CommonAPI::CallStatus::SUCCESS) {
@@ -33,9 +33,9 @@ void HelloProxyMain::Init()
         return;
     }
 
-    while (!mMyProxy->isAvailable()) {
-        std::this_thread::sleep_for(std::chrono::microseconds(10));
-    }
+    //    while (!mMyProxy->isAvailable()) {
+    //        std::this_thread::sleep_for(std::chrono::microseconds(10));
+    //    }
 
     std::cout << "Connection Established!" << std::endl;
 
@@ -111,6 +111,7 @@ void HelloProxyMain::callbackConnectionStatusChanged(CommonAPI::AvailabilityStat
 void HelloProxyMain::callbackMyEventChanged(const int32_t& myValue)
 {
     qDebug() << Q_FUNC_INFO << "proxy myValue : " << myValue;
+    MyQuickItemProxy::instance()->setTestValue(myValue);
 }
 
 bool HelloProxyMain::SubscribeStubAttributeChagedEvent()

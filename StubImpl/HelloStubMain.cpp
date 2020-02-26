@@ -35,7 +35,7 @@ void HelloStubMain::Init()
     }
 }
 
-void HelloStubMain::testFunction()
+void HelloStubMain::testFunction(int value)
 {
     //    qDebug() << Q_FUNC_INFO << 1;
     //    CommonTypes::EnumMyStatus status(CommonTypes::EnumMyStatus::ENUM_STATUS_OK);
@@ -47,6 +47,6 @@ void HelloStubMain::testFunction()
     //        qDebug() << Q_FUNC_INFO << "errer";
     //    }
 
-    mMyService->fireMyEventEvent(mMyValue++);
-    qDebug() << Q_FUNC_INFO << "mMyValue : " << mMyValue;
+    mMyService->fireMyEventEvent(value);
+    qDebug() << Q_FUNC_INFO << "value : " << value;
 }

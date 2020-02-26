@@ -14,7 +14,9 @@ Item {
             anchors.fill: parent
             onClicked: {
                 console.log("@@@@@@@@@")
-                MyQuickItem.testFunction()
+                MyQuickItemStub.testValue = MyQuickItemStub.testValue + 1
+                MyQuickItemStub.testFunction(MyQuickItemStub.testValue)
+                console.log("MyQuickItemStub.testValue :" , MyQuickItemStub.testValue)
             }
         }
     }

@@ -57,19 +57,19 @@ SOURCES       = ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
 		HelloStubImpl.cpp \
 		HelloStubMain.cpp \
 		MainWindowStub.cpp \
-		MyQuickItem.cpp \
+		MyQuickItemStub.cpp \
 		main.cpp qrc_qml.cpp \
-		moc_MyQuickItem.cpp \
+		moc_MyQuickItemStub.cpp \
 		moc_MainWindowStub.cpp
 OBJECTS       = HelloWorldDBusStubAdapter.o \
 		HelloWorldStubDefault.o \
 		HelloStubImpl.o \
 		HelloStubMain.o \
 		MainWindowStub.o \
-		MyQuickItem.o \
+		MyQuickItemStub.o \
 		main.o \
 		qrc_qml.o \
-		moc_MyQuickItem.o \
+		moc_MyQuickItemStub.o \
 		moc_MainWindowStub.o
 DIST          = ../fidl/CommonTypes.fidl \
 		../fidl/hello.fidl \
@@ -277,13 +277,13 @@ DIST          = ../fidl/CommonTypes.fidl \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
 		StubImpl.pro HelloStubImpl.h \
 		HelloStubMain.h \
-		MyQuickItem.h \
+		MyQuickItemStub.h \
 		MainWindowStub.h ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
 		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
 		HelloStubImpl.cpp \
 		HelloStubMain.cpp \
 		MainWindowStub.cpp \
-		MyQuickItem.cpp \
+		MyQuickItemStub.cpp \
 		main.cpp
 QMAKE_TARGET  = StubImpl
 DESTDIR       = 
@@ -731,8 +731,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents HelloStubImpl.h HelloStubMain.h MyQuickItem.h MainWindowStub.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp HelloStubImpl.cpp HelloStubMain.cpp MainWindowStub.cpp MyQuickItem.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents HelloStubImpl.h HelloStubMain.h MyQuickItemStub.h MainWindowStub.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp HelloStubImpl.cpp HelloStubMain.cpp MainWindowStub.cpp MyQuickItemStub.cpp main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -769,10 +769,10 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_MyQuickItem.cpp moc_MainWindowStub.cpp
+compiler_moc_header_make_all: moc_MyQuickItemStub.cpp moc_MainWindowStub.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MyQuickItem.cpp moc_MainWindowStub.cpp
-moc_MyQuickItem.cpp: MyQuickItem.h \
+	-$(DEL_FILE) moc_MyQuickItemStub.cpp moc_MainWindowStub.cpp
+moc_MyQuickItemStub.cpp: MyQuickItemStub.h \
 		HelloStubMain.h \
 		HelloStubImpl.h \
 		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
@@ -922,7 +922,7 @@ moc_MyQuickItem.cpp: MyQuickItem.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qrgba64.h \
 		moc_predefs.h \
 		/opt/Qt/5.12.3/gcc_64/bin/moc
-	/opt/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/ldg/QtExample/study/TestCommonAPI/StubImpl/moc_predefs.h -I/opt/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/ldg/QtExample/study/TestCommonAPI/StubImpl -I/opt/GENIVI/include -I/opt/GENIVI/include/dlt -I/opt/GENIVI/include/dbus-1.0 -I/opt/GENIVI/include/CommonAPI-3.1 -I/opt/GENIVI/lib/dbus-1.0/include -I/home/ldg/QtExample/study/TestCommonAPI/src-gen -I/opt/Qt/5.12.3/gcc_64/include -I/opt/Qt/5.12.3/gcc_64/include/QtQuick -I/opt/Qt/5.12.3/gcc_64/include/QtGui -I/opt/Qt/5.12.3/gcc_64/include/QtQml -I/opt/Qt/5.12.3/gcc_64/include/QtNetwork -I/opt/Qt/5.12.3/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include MyQuickItem.h -o moc_MyQuickItem.cpp
+	/opt/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/ldg/QtExample/study/TestCommonAPI/StubImpl/moc_predefs.h -I/opt/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/ldg/QtExample/study/TestCommonAPI/StubImpl -I/opt/GENIVI/include -I/opt/GENIVI/include/dlt -I/opt/GENIVI/include/dbus-1.0 -I/opt/GENIVI/include/CommonAPI-3.1 -I/opt/GENIVI/lib/dbus-1.0/include -I/home/ldg/QtExample/study/TestCommonAPI/src-gen -I/opt/Qt/5.12.3/gcc_64/include -I/opt/Qt/5.12.3/gcc_64/include/QtQuick -I/opt/Qt/5.12.3/gcc_64/include/QtGui -I/opt/Qt/5.12.3/gcc_64/include/QtQml -I/opt/Qt/5.12.3/gcc_64/include/QtNetwork -I/opt/Qt/5.12.3/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include MyQuickItemStub.h -o moc_MyQuickItemStub.cpp
 
 moc_MainWindowStub.cpp: MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/QQmlContext \
@@ -1529,7 +1529,7 @@ MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmllist.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetaobject.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmldebug.h \
-		MyQuickItem.h \
+		MyQuickItemStub.h \
 		HelloStubMain.h \
 		HelloStubImpl.h \
 		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
@@ -1582,7 +1582,7 @@ MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindowStub.o MainWindowStub.cpp
 
-MyQuickItem.o: MyQuickItem.cpp MyQuickItem.h \
+MyQuickItemStub.o: MyQuickItemStub.cpp MyQuickItemStub.h \
 		HelloStubMain.h \
 		HelloStubImpl.h \
 		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
@@ -1771,7 +1771,7 @@ MyQuickItem.o: MyQuickItem.cpp MyQuickItem.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qpainterpath.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qcursor.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmldebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MyQuickItem.o MyQuickItem.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MyQuickItemStub.o MyQuickItemStub.cpp
 
 main.o: main.cpp MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/QQmlContext \
@@ -1918,8 +1918,8 @@ main.o: main.cpp MainWindowStub.h \
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
 
-moc_MyQuickItem.o: moc_MyQuickItem.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MyQuickItem.o moc_MyQuickItem.cpp
+moc_MyQuickItemStub.o: moc_MyQuickItemStub.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MyQuickItemStub.o moc_MyQuickItemStub.cpp
 
 moc_MainWindowStub.o: moc_MainWindowStub.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindowStub.o moc_MainWindowStub.cpp

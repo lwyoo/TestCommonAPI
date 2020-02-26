@@ -13,11 +13,13 @@ INCLUDEPATH+= \
 SOURCES += \
 #    TestProxyImp.cpp \
     HelloProxyMain.cpp \
-                main.cpp \
+    MainWindowProxy.cpp \
+    MyQuickItemProxy.cpp \
 #                $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
                 $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
+    main.cpp
 #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \
+ #                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusProxy.cpp \
 
 LIBS += \
                 -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt
@@ -30,5 +32,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    MainWindowProxy.h \
+    MyQuickItemProxy.h \
  \#    TestProxyImp.h
     HelloProxyMain.h
