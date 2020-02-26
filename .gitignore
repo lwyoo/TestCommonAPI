@@ -18,4 +18,6 @@ moc_*.h
 */*.qbs.user.*
 */ProxyImpl
 */StubImpl
+*/core
+*/qrc_qml.cpp
 
