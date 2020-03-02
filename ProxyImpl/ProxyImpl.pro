@@ -11,6 +11,7 @@ INCLUDEPATH+= \
     $$PWD/../src-gen \
 
 SOURCES += \
+    ADASEventBuffer.cpp \
     CommonAPIProxy.cpp \
     MainWindowProxy.cpp \
     MyQuickItemProxy.cpp \
@@ -30,6 +31,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    ADASEventBuffer.h \
+    ADASTypes.h \
     CommonAPIProxy.h \
     MainWindowProxy.h \
     MyQuickItemProxy.h \
