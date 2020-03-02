@@ -13,33 +13,25 @@ INCLUDEPATH+= \
                 $$PWD/../src-gen \
 
 SOURCES += \
-#    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.cpp \
-    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
-    $$PWD/../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
-    HelloStubImpl.cpp \
-    HelloStubMain.cpp \
-#    TestStubImp.cpp \
+    $$PWD/../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp \
+    $$PWD/../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp \
+    CommonAPIStub.cpp \
+    CommonAPIStubImpl.cpp \
     MainWindowStub.cpp \
     MyQuickItemStub.cpp \
-                main.cpp \
-#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusDeployment.cpp \
-#                $$PWD/../src-gen/v1/proj/testcode/TestCodeStubDefault.cpp \
-#                $$PWD/../src-gen/v1/proj/testcode/TestCodeDBusStubAdapter.cpp \
+    main.cpp \
 
 LIBS += \
-                -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt
+    -L/opt/GENIVI/lib -lCommonAPI -lCommonAPI-DBus -ldbus-1 -ldlt
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    HelloStubImpl.h \
-    HelloStubMain.h \
+    CommonAPIStub.h \
+    CommonAPIStubImpl.h \
     MyQuickItemStub.h \
- \#    TestStubImp.h
-    MainWindowStub.h
+    MainWindowStub.h \
 
-DISTFILES += \
-    ../fidl/CommonTypes.fidl \
-    ../fidl/hello.fidl
+

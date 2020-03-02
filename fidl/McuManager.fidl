@@ -1,0 +1,289 @@
+package proj.dcluster.McuManager
+
+import proj.dcluster.McuManager.McuManagerTypes.* from "McuManagerTypes.fidl"
+
+interface McuManager
+{
+    version { major 1 minor 0}
+
+    attribute Boolean MainContentsDisplayControl
+
+    attribute EnumDrivingState DrivingState
+
+    attribute StDriveModeInfo DriveMode
+
+    attribute StVariantInfo Variant
+
+    attribute StEOLInfo EOL
+
+    attribute StSWVariantInfo SWVariant
+
+    broadcast NotifySteerWheelKey
+    {
+        out
+        {
+            EnumStreerWheelKey sw_key
+        }
+    }
+
+    broadcast NotifyIGNState
+    {
+        out
+        {
+            EnumIGNState ign_state
+        }
+    }
+
+    // ### TODO (Chris.Ahn): Temporary code
+    attribute EnumIGNState IGN1State
+    attribute EnumIGNState IGN3State
+    attribute EnumSpeedoUnit SpeedoUnit
+
+
+    /////////////////////////////////////////////
+    /////////////// Main Contents ///////////////
+    /////////////////////////////////////////////
+
+    attribute StTripDriveModeInfo TripDriveMode
+
+    attribute StTripDTEInfo TripDTE
+
+    attribute StTripFuelEconomyInfo TripFuelEconomy
+
+    attribute StTripAccumulatedInfo TripAccumulated
+
+    attribute StTripDriveInfo TripDriveInfo
+
+    attribute StTripSpeedMeter TripDigitalSpeedMeter    
+
+    attribute EnumPowerFlow TripPowerFlowDiagram
+
+    attribute UInt8 TripUREALevel
+
+    attribute EnumTransmissionTempLevel TripTransmissionTemp
+
+    attribute StEngineCoolantTemp TripEngineCoolantTemp
+
+    attribute StEnergyFlowInfo EnergyFlow
+    attribute StMyDrvModeInfo MyDrivingMode
+
+    attribute EnumTBTDisplayType TBTDisplayType
+    attribute Boolean TBTDisplayTollgate
+    attribute UInt8 TBTPreliminaryInfo
+    attribute EnumTBTPageState TBTDestInfoPageState
+    attribute EnumTBTPointType TBTPointType
+    attribute UInt8 TBTDirection
+    attribute UInt16 TBTRoadDisplay
+    attribute UInt8 TBTSideRoadDisplay
+    attribute StTBTDistDestInfo TBTDistanceToDestination
+    attribute StTBTTurnInfo TBTDistanceUntilTurn
+    attribute StTBTDestinationTime TBTExpectedDestTime
+    attribute StTBTRemainTime TBTExpectedRemainTime
+    attribute TPData TBTGuideTPInfo
+    attribute TPData TBTDestTPInfo
+    attribute TPData TBTViaPoint1TPInfo
+    attribute TPData TBTViaPoint2TPInfo
+    attribute TPData TBTViaPoint3TPInfo
+    attribute TPData TBTViaPoint4TPInfo
+
+    attribute StDriveAssistCCInfoTTC DriveAssistCruiseControlTTC
+    attribute StDriveAssistCCInfoReal DriveAssistCruiseControlReal
+    attribute StDriveAssistLaneInfo DriveAssistLane
+    attribute StDriveAssistDAWInfo DriveAssistDAW
+    attribute StDriveAssistISLWInfo DriveAssistISLW
+    attribute StDriveAssistAWDInfo DriveAssistAWD
+    attribute StDriveAssistTPMSInfo DriveAssistTPMS
+    attribute StAdasInfo AdasInfo
+
+
+
+
+    ////////////////////////////////////////
+    /////////////// Contents ///////////////
+    ////////////////////////////////////////
+
+    broadcast NotifyContentsGearState
+    {
+        out
+        {
+            StContentsGearInfo gear_info
+        }
+    }
+
+    // ### TODO (Chris.Ahn): Temporary code
+    attribute StContentsGearInfo ContentsGear
+
+    attribute StContentsCCInfo ContentsCC
+    attribute StContentsSCCInfo ContentsSCC
+
+    attribute StContentsCoasting ContentsCoasting
+
+    attribute StContentsDISInfo ContentsDIS
+
+    attribute StContentsDTE ContentsDTEInfo
+
+    attribute StContentsISLWInfo ContentsISLW
+
+    attribute StContentsOAT ContentsOAT
+
+    attribute StContentsODO ContentsODOMeter
+
+    attribute EnumEcoPwrDispState EcoPowerDisplayInfo
+
+    attribute StContentsRSBRInfo ContentsRSBR
+
+    attribute StContentsSpdLimitInfo ContentsSpeedLimit
+
+
+
+    //////////////////////////////////////////////
+    /////////////// Event Contents ///////////////
+    //////////////////////////////////////////////
+
+    broadcast NotifyEventContents
+    {
+        out
+        {
+            StEventContentsInfo event_info
+        }
+    }
+
+    broadcast NotifyMasterWarnInfo
+    {
+    }
+
+    broadcast NotifyMasterWarnCmd
+    {
+        out
+        {
+            EnumMasterWarnCmd cmd
+        }
+    }
+    attribute EnumMasterWarnCmd MasterWarnCmd
+
+    attribute TPData AvTpAMFMInfo
+    attribute TPData AvTpXMInfo
+    attribute TPData AvTpDABInfo
+    attribute TPData AvTpDMBInfo
+    attribute TPData AvTpJukeBoxInfo
+    attribute TPData AvTpIpodInfo
+    attribute TPData AvTpUSBInfo
+    attribute TPData AvTpBlueToothInfo
+    attribute TPData AvTpAppleCarPlayInfo
+    attribute TPData AvTpAndroidAutoInfo
+    attribute TPData AvTpIboxInfo
+    attribute TPData AvTpCDInfo
+    attribute TPData AvTpBaiduMInfo
+
+    // ### TODO (Chris.Ahn): Temporary API
+    attribute StEventContentsInfo EventContentsFull
+    attribute StEventContentsInfo EventContentsMini
+
+    attribute Boolean EventAccessory
+
+
+
+    /////////////////////////////////////////
+    /////////////// USM (CLU) ///////////////
+    /////////////////////////////////////////
+
+    attribute Boolean PowerTailGateWarnState
+    attribute USM_LANGUAGE_VALUE DisplayLanguage
+
+    attribute USMItem32 UsmDriverAssist_SccReaction readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_LeadingVehicleDepartureAlert readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_LaneFollowingAssist readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_HighwayDrivingAssist readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_HighwayAutoSpeedZoneSlowDown readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_HighwayAutoCurveSlowDown readonly
+    attribute USMItem32 UsmDriverAssist_DrivingAssist_SpeedLimitWarning readonly
+    attribute USMItem32 UsmDriverAssist_DriverAttentionWarning readonly
+    attribute USMItem32 UsmDriverAssist_WarningTiming readonly
+    attribute USMItem32 UsmDriverAssist_WarningVolume readonly
+    attribute USMItem32 UsmDriverAssist_LaneSafety readonly
+    attribute USMItem32 UsmDriverAssist_LaneSafety_Mode readonly
+    attribute USMItem32 UsmDriverAssist_ForwardSafety readonly
+    attribute USMItem32 UsmDriverAssist_BlindSpotSafety_SpotView readonly
+    attribute USMItem32 UsmDriverAssist_BlindSpotSafety_SafetyExitAssist readonly
+    attribute USMItem32 UsmDriverAssist_BlindSpotSafety_WarningOnly readonly
+    attribute USMItem32 UsmDriverAssist_BlindSpotSafety_RearCrossTrafficSafety readonly
+    attribute USMItem32 UsmDoor_AutoLock readonly
+    attribute USMItem32 UsmDoor_AutoUnlock_KeyOrPower readonly
+    attribute USMItem32 UsmDoor_AutoUnlock readonly
+    attribute USMItem32 UsmDoor_HornFeedback readonly
+    attribute USMItem32 UsmDoor_PowerTailgate readonly
+    attribute USMItem32 UsmDoor_PowerTailgateSpeed readonly
+    attribute USMItem32 UsmDoor_SmartTailgate readonly
+    attribute USMItem32 UsmLights_OneTouchTurnSignal readonly
+    attribute USMItem32 UsmLights_AmbientLight readonly
+    attribute USMItem32 UsmLights_HeadlightDelay readonly
+    attribute USMItem32 UsmLights_HighBeamAssist readonly
+    attribute USMItem32 UsmSound_ClusterVoiceGuidanceVolume readonly
+    attribute USMItem32 UsmSound_ParkAssistVolume readonly
+    attribute USMItem32 UsmSound_WelcomeSound readonly
+    attribute USMItem32 UsmConvenience_SeatEasyAccess readonly
+    attribute USMItem32 UsmConvenience_WelcomeMirrorLight_Title readonly
+    attribute USMItem32 UsmConvenience_WelcomeMirrorLight_OnDoorUnlock readonly
+    attribute USMItem32 UsmConvenience_WelcomeMirrorLight_OnDriverApproach readonly
+    attribute USMItem32 UsmConvenience_MirrorAutoFolding readonly
+    attribute USMItem32 UsmConvenience_WirelessChargingSystem readonly
+    attribute USMItem32 UsmConvenience_TrafficInformation readonly
+    attribute USMItem32 UsmConvenience_WipreLightsDisplay readonly
+    attribute USMItem32 UsmConvenience_AutoRearWiperInR readonly
+    attribute USMItem32 UsmConvenience_GearPositionPopup readonly
+    attribute USMItem32 UsmConvenience_IcyRoadWarning readonly
+    attribute USMItem32 UsmServiceInterval_Mode readonly
+    attribute USMItem32 UsmServiceInterval_EnableServiceInterval readonly
+    attribute USMItem32 UsmServiceInterval_Reset readonly
+    attribute USMItem32 UsmOther_FuelEconomyReset readonly
+    attribute USMItem32 UsmOther_FuelEconomyUnit readonly
+    attribute USMItem32 UsmOther_TemperatureUnit readonly
+    attribute USMItem32 UsmOther_TirePressureUnit readonly
+    attribute USMItem32 UsmOther_SpeedUnit readonly
+    attribute USMItem32 UsmOther_TorqueUnit readonly
+    attribute USMItem32 UsmOther_TurboBoostPressureUnit readonly
+    attribute USMItem32 UsmEcoVehicle_GreenZoneEVDrive readonly
+    attribute USMItem32 UsmEcoVehicle_CoastingGuideEnable readonly
+    attribute USMItem32 UsmEcoVehicle_CoastingGuideSound readonly
+    attribute USMItem32 UsmEcoVehicle_StartCoasting readonly
+    attribute USMItem32 UsmEcoVehicle_ChargingConnectorLockingMode readonly
+    attribute USMItem32 UsmEcoVehicle_ChargingConnectorCondition readonly
+    attribute USMItem32 UsmEcoVehicle_AuxiliaryBatterySaverPlus readonly
+    attribute USMItem32 UsmLanguage readonly
+    attribute USMServiceReminder UsmService_Reminder readonly
+    attribute USMItem32 UsmEcoVehicle_VolumeControlFunctionForVESS readonly
+
+    /////////////////////////////////////////
+    /////////////// USM (AVN) ///////////////
+    /////////////////////////////////////////
+
+
+
+    /////////////////////////////////////
+    /////////////// Sound ///////////////
+    /////////////////////////////////////
+
+    broadcast NotifySound
+    {
+        out
+        {
+            StSoundInfo channel_1
+            StSoundInfo channel_2
+            StSoundInfo channel_3
+            StSoundInfo channel_4
+        }
+    }
+
+
+    method Command {
+        in {
+            UInt8 id
+            CmdData data
+        }
+        out {
+            Boolean result
+        }
+    }
+
+    attribute GroupTabInfo lastTabInfo readonly
+}

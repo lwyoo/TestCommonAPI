@@ -33,3 +33,7 @@ private:
 };
 
 #endif // HELLOIMPL_H
+
+//#include "v1/proj/dcluster/McuManager/McuManagerProxy.hpp"
+//using MCUManagerType = v1::proj::dcluster::McuManager::McuManagerTypes;
+//    void callbackAdasInfoAttributeChanged( const MCUManagerType::StAdasInfo &_value );

@@ -1,6 +1,7 @@
 #ifndef MyQuickItemStub_H
 #define MyQuickItemStub_H
-#include "HelloStubMain.h"
+//#include "HelloStubMain.h"
+#include "CommonAPIStub.h"
 #include <QElapsedTimer>
 #include <QQuickItem>
 class MyQuickItemStub : public QQuickItem {
@@ -33,7 +34,7 @@ private:
 
     QElapsedTimer mTimer;
 
-    HelloStubMain* mStub;
+    CommonAPIStub* mStub;
 
     int mVaue;
 };

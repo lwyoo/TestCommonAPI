@@ -98,7 +98,7 @@ MyQuickItemStub::MyQuickItemStub(QQuickItem* parent)
     qDebug() << "windowList count : " << windowList.count();
     qDebug() << "duration time : " << mTimer.elapsed() << "milliseconds";
 
-    mStub = new HelloStubMain();
+    mStub = new CommonAPIStub();
     mStub->Init();
 
     if (windowList.count() > 0) {

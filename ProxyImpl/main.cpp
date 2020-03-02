@@ -1,4 +1,5 @@
-#include "HelloProxyMain.h"
+//#include "HelloProxyMain.h"
+#include "CommonAPIProxy.h"
 #include "MainWindowProxy.h"
 #include "squircle.h"
 #include <QGuiApplication>
@@ -13,8 +14,8 @@ int main(int argc, char* argv[])
 
     MainWindowProxy::instance();
 
-    HelloProxyMain* proxyInst = new HelloProxyMain();
-    proxyInst->Init();
+    CommonAPIProxy* proxyInst = new CommonAPIProxy();
+    proxyInst->InitAsync();
     proxyInst->SubscribeBroadcast();
 
     MainWindowProxy::instance()->show();

@@ -7,12 +7,13 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#include "HelloWorldDBusDeployment.hpp"
+#include "McuManagerDBusDeployment.hpp"
 
-namespace v0 {
-namespace commonapi {
-namespace examples {
-namespace HelloWorld_ {
+namespace v1 {
+namespace proj {
+namespace dcluster {
+namespace McuManager {
+namespace McuManager_ {
 
 // Type-specific deployments
 
@@ -22,7 +23,8 @@ namespace HelloWorld_ {
 
 // Broadcast-specific deployments
 
-} // namespace HelloWorld_
-} // namespace examples
-} // namespace commonapi
-} // namespace v0
+} // namespace McuManager_
+} // namespace McuManager
+} // namespace dcluster
+} // namespace proj
+} // namespace v1

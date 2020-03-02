@@ -52,24 +52,24 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = HelloProxyMain.cpp \
+SOURCES       = CommonAPIProxy.cpp \
 		MainWindowProxy.cpp \
 		MyQuickItemProxy.cpp \
-		../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
 		main.cpp \
 		squircle.cpp \
-		squirclerenderer.cpp qrc_qml.cpp \
+		squirclerenderer.cpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.cpp qrc_qml.cpp \
 		moc_MainWindowProxy.cpp \
 		moc_MyQuickItemProxy.cpp \
 		moc_squircle.cpp \
 		moc_squirclerenderer.cpp
-OBJECTS       = HelloProxyMain.o \
+OBJECTS       = CommonAPIProxy.o \
 		MainWindowProxy.o \
 		MyQuickItemProxy.o \
-		HelloWorldDBusProxy.o \
 		main.o \
 		squircle.o \
 		squirclerenderer.o \
+		McuManagerDBusProxy.o \
 		qrc_qml.o \
 		moc_MainWindowProxy.o \
 		moc_MyQuickItemProxy.o \
@@ -277,17 +277,17 @@ DIST          = /opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
-		ProxyImpl.pro MainWindowProxy.h \
+		ProxyImpl.pro CommonAPIProxy.h \
+		MainWindowProxy.h \
 		MyQuickItemProxy.h \
-		HelloProxyMain.h \
 		squircle.h \
-		squirclerenderer.h HelloProxyMain.cpp \
+		squirclerenderer.h CommonAPIProxy.cpp \
 		MainWindowProxy.cpp \
 		MyQuickItemProxy.cpp \
-		../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp \
 		main.cpp \
 		squircle.cpp \
-		squirclerenderer.cpp
+		squirclerenderer.cpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.cpp
 QMAKE_TARGET  = ProxyImpl
 DESTDIR       = 
 TARGET        = ProxyImpl
@@ -734,8 +734,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents MainWindowProxy.h MyQuickItemProxy.h HelloProxyMain.h squircle.h squirclerenderer.h $(DISTDIR)/
-	$(COPY_FILE) --parents HelloProxyMain.cpp MainWindowProxy.cpp MyQuickItemProxy.cpp ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp main.cpp squircle.cpp squirclerenderer.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CommonAPIProxy.h MainWindowProxy.h MyQuickItemProxy.h squircle.h squirclerenderer.h $(DISTDIR)/
+	$(COPY_FILE) --parents CommonAPIProxy.cpp MainWindowProxy.cpp MyQuickItemProxy.cpp main.cpp squircle.cpp squirclerenderer.cpp ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1297,17 +1297,17 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-HelloProxyMain.o: HelloProxyMain.cpp HelloProxyMain.h \
-		../src-gen/v0/commonapi/examples/HelloWorldProxy.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+CommonAPIProxy.o: CommonAPIProxy.cpp CommonAPIProxy.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerProxy.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerProxyBase.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
@@ -1332,9 +1332,12 @@ HelloProxyMain.o: HelloProxyMain.cpp HelloProxyMain.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/AttributeExtension.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
-		MyQuickItemProxy.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QElapsedTimer \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/MainLoopContext.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qconfig.h \
@@ -1356,29 +1359,16 @@ HelloProxyMain.o: HelloProxyMain.cpp HelloProxyMain.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQuick/QQuickItem \
-		/opt/Qt/5.12.3/gcc_64/include/QtQuick/qquickitem.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQuick/qtquickglobal.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qtqmlglobal.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qtqml-config.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQuick/qtquick-config.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqml.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlprivate.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qhashfunctions.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstring.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringliteral.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringalgorithms.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringview.h \
@@ -1388,64 +1378,28 @@ HelloProxyMain.o: HelloProxyMain.cpp HelloProxyMain.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringlist.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qregexp.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qstringmatcher.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcoreevent.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qurl.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qurlquery.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlparserstatus.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmllist.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetaobject.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlcomponent.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmlerror.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtQml/qjsvalue.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QObject \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QList \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qevent.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qregion.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qrect.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmargins.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsize.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdatastream.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qkeysequence.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfile.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qfont.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qaccessible.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcoreapplication.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/qeventloop.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qcolor.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qrgb.h \
-		/opt/Qt/5.12.3/gcc_64/include/QtGui/qrgba64.h \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/MainLoopContext.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QDebug
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloProxyMain.o HelloProxyMain.cpp
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CommonAPIProxy.o CommonAPIProxy.cpp
 
 MainWindowProxy.o: MainWindowProxy.cpp MainWindowProxy.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/QQmlContext \
@@ -1748,102 +1702,17 @@ MyQuickItemProxy.o: MyQuickItemProxy.cpp MyQuickItemProxy.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmldebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MyQuickItemProxy.o MyQuickItemProxy.cpp
 
-HelloWorldDBusProxy.o: ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+main.o: main.cpp CommonAPIProxy.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerProxy.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerProxyBase.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Variant.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Logger.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/LoggerImpl.hpp \
-		/opt/GENIVI/include/dlt/dlt.h \
-		/opt/GENIVI/include/dlt/dlt_common.h \
-		/opt/GENIVI/include/dlt/dlt_types.h \
-		/opt/GENIVI/include/dlt/dlt_protocol.h \
-		/opt/GENIVI/include/dlt/dlt_user.h \
-		/opt/GENIVI/include/dlt/dlt_user_macros.h \
-		/opt/GENIVI/include/dlt/dlt_version.h \
-		/opt/GENIVI/include/dlt/dlt_shm.h \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Attribute.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CallInfo.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Config.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Proxy.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypesDBusDeployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusDeployment.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddress.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFactory.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusTypes.hpp \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus.h \
-		/opt/GENIVI/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-macros.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-address.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-types.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-errors.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-protocol.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-bus.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-connection.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-memory.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-message.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-shared.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-misc.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-pending-call.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-server.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-signature.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-syntax.h \
-		/opt/GENIVI/include/dbus-1.0/dbus/dbus-threads.h \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxy.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAttribute.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusConfig.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusEvent.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusHelper.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusMessage.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyBase.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyConnection.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusError.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFunctionalHash.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusSerializableArguments.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/SerializableArguments.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusInputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFreedesktopVariant.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusTypeOutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/TypeOutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusOutputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyHelper.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyAsyncCallbackHandler.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusErrorEvent.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusServiceRegistry.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/pugixml/pugixml.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/pugixml/pugiconfig.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusObjectManagerStub.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusInterfaceHandler.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddressTranslator.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloWorldDBusProxy.o ../src-gen/v0/commonapi/examples/HelloWorldDBusProxy.cpp
-
-main.o: main.cpp HelloProxyMain.h \
-		../src-gen/v0/commonapi/examples/HelloWorldProxy.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldProxyBase.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
@@ -2333,6 +2202,91 @@ squirclerenderer.o: squirclerenderer.cpp squirclerenderer.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtGui/qcursor.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmldebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o squirclerenderer.o squirclerenderer.cpp
+
+McuManagerDBusProxy.o: ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.cpp ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerProxyBase.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Variant.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Logger.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/LoggerImpl.hpp \
+		/opt/GENIVI/include/dlt/dlt.h \
+		/opt/GENIVI/include/dlt/dlt_common.h \
+		/opt/GENIVI/include/dlt/dlt_types.h \
+		/opt/GENIVI/include/dlt/dlt_protocol.h \
+		/opt/GENIVI/include/dlt/dlt_user.h \
+		/opt/GENIVI/include/dlt/dlt_user_macros.h \
+		/opt/GENIVI/include/dlt/dlt_version.h \
+		/opt/GENIVI/include/dlt/dlt_shm.h \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Attribute.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CallInfo.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Config.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Proxy.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusDeployment.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypesDBusDeployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusDeployment.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddress.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFactory.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusTypes.hpp \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus.h \
+		/opt/GENIVI/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-macros.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-address.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-types.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-errors.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-protocol.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-bus.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-connection.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-memory.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-message.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-shared.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-misc.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-pending-call.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-server.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-signature.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-syntax.h \
+		/opt/GENIVI/include/dbus-1.0/dbus/dbus-threads.h \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxy.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAttribute.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusConfig.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusEvent.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusHelper.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusMessage.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyBase.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyConnection.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusError.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFunctionalHash.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusSerializableArguments.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/SerializableArguments.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusInputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusFreedesktopVariant.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusTypeOutputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/TypeOutputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusOutputStream.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyHelper.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusProxyAsyncCallbackHandler.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusErrorEvent.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusServiceRegistry.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/pugixml/pugixml.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/pugixml/pugiconfig.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusObjectManagerStub.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusInterfaceHandler.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddressTranslator.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o McuManagerDBusProxy.o ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusProxy.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp

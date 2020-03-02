@@ -1,0 +1,2243 @@
+package proj.dcluster.McuManager
+
+typeCollection McuManagerTypes
+{
+    version
+    {
+        major 1
+        minor 0
+    }
+
+    enumeration EnumValueDisplayType
+    {
+        VALUE_NOT_DISPLAY
+        VALUE_DISPLAY
+        VALUE_DISPLAY_BLINKING
+        VALUE_DISPLAY_DASH
+        VALUE_DISPLAY_DASH_BLINKING
+        VALUE_MAX
+    }
+
+    enumeration EnumDrivingState
+    {
+        DRIVE_STATE_PARKING
+        DRIVE_STATE_DRIVING
+        DRIVE_STATE_MAX
+    }
+
+    enumeration EnumLanguageType
+    {
+        LANGUAGE_TYPE_NONE
+        LANGUAGE_TYPE_KOREA
+        LANGUAGE_TYPE_ENGLISH_US
+        LANGUAGE_TYPE_ENGLISH_UK
+        LANGUAGE_TYPE_SIMPLIFIED_CHINESE
+        LANGUAGE_TYPE_TRADITIONAL_CHINESE
+        LANGUAGE_TYPE_FRENCH_EU
+        LANGUAGE_TYPE_SPANISH_EU
+        LANGUAGE_TYPE_ARABIC
+        LANGUAGE_TYPE_CZEC
+        LANGUAGE_TYPE_DANISH
+        LANGUAGE_TYPE_GERMAN
+        LANGUAGE_TYPE_ITALIA
+        LANGUAGE_TYPE_DUTCH
+        LANGUAGE_TYPE_POLISH
+        LANGUAGE_TYPE_PORTUGUESE
+        LANGUAGE_TYPE_RUSSAIN
+        LANGUAGE_TYPE_SLOVAK
+        LANGUAGE_TYPE_SWEDISH
+        LANGUAGE_TYPE_TURKISH
+        LANGUAGE_TYPE_FRENCH_US
+        LANGUAGE_TYPE_SPANISH_US
+        LANGUAGE_TYPE_ENGLISH_INDIA
+        LANGUAGE_TYPE_NORWEGIAN
+        LANGUAGE_TYPE_FINNISH
+        LANGUAGE_TYPE_INDONESIAN
+        LANGUAGE_TYPE_BRAZILIAN_PORTUGUESE
+        LANGUAGE_TYPE_MALAY
+        LANGUAGE_TYPE_HUNGARIAN
+        LANGUAGE_TYPE_ENGLISH_AUS
+        LANGUAGE_TYPE_JAPANESE
+        LANGUAGE_TYPE_MAX
+    }
+
+    enumeration EnumAreaType
+    {
+        AREA_TYPE_NONE
+        AREA_TYPE_DOM
+        AREA_TYPE_GEN
+        AREA_TYPE_MES
+        AREA_TYPE_EEC
+        AREA_TYPE_AUS
+        AREA_TYPE_CAN
+        AREA_TYPE_USA
+        AREA_TYPE_RUSSIA
+        AREA_TYPE_BRZ
+        AREA_TYPE_CHINA
+        AREA_TYPE_MAX
+    }
+
+    enumeration EnumEngineType
+    {
+        ENGINE_TYPE_NONE
+        ENGINE_TYPE_GASOLINE
+        ENGINE_TYPE_DIESEL
+        ENGINE_TYPE_MAX
+    }
+
+    enumeration EnumSpeedoType
+    {
+        SPEEDO_TYPE_NONE
+        SPEEDO_TYPE_KM
+        SPEEDO_TYPE_MILE
+        SPEEDO_TYPE_MAX
+    }
+
+    enumeration EnumMissionType
+    {
+        MISSION_TYPE_NONE
+        MISSION_TYPE_MANUAL     // M/T
+        MISSION_TYPE_AUTOMATIC  // A/T
+        MISSION_TYPE_MAX
+    }
+
+    enumeration EnumBodyType
+    {
+        BODY_TYPE_NONE
+        BODY_TYPE_CUV
+        BODY_TYPE_SB
+        BODY_TYPE_WGN
+        BODY_TYPE_5DR
+        BODY_TYPE_MAX
+    }
+
+    enumeration EnumPlatformType
+    {
+        PLATFORM_TYPE_NONE
+        PLATFORM_TYPE_ALPHA
+        PLATFORM_TYPE_BETA
+        PLATFORM_TYPE_GAMMA
+        PLATFORM_TYPE_DELTA
+        PLATFORM_TYPE_12_3_CUV
+        PLATFORM_TYPE_12_3_48V_HEV
+        PLATFORM_TYPE_12_3_GT_N
+        PLATFORM_TYPE_12_3_GT_LINE
+        PLATFORM_TYPE_MAX
+    }
+
+    struct StVariantInfo
+    {
+        EnumLanguageType language
+        EnumSpeedoType speedo_type
+        EnumAreaType area
+        EnumEngineType engine_type
+        EnumBodyType body_type
+        EnumPlatformType platform_type
+    }
+
+    struct StEOLInfo
+    {
+        UInt8 ecs
+        UInt8 airbag
+        UInt8 mdps
+        UInt8 abs
+        UInt8 esc
+        UInt8 epb
+        UInt8 psb
+        UInt8 afls
+        UInt8 tpms
+        UInt8 ldwslkas
+        UInt8 scc
+        UInt8 cubis
+        UInt8 _4wd
+        UInt8 evp
+
+        EnumMissionType mission
+    }
+
+    struct StSWVariantInfo
+    {
+        UInt8 user_profile
+        UInt8 lfa
+        UInt8 avn_clu_usm
+        UInt8 avn_tbt_unit
+        UInt8 dct
+        UInt8 aa    // Modified Name: DAW
+        UInt8 fca
+        UInt8 avn
+        UInt8 bcw
+        UInt8 hba
+        UInt8 smart_shift
+        UInt8 amp
+        UInt8 islw_popup
+        UInt8 islw_page
+        UInt8 fcw
+        UInt8 hud
+        UInt8 scr
+        UInt8 fwiper_type
+        UInt8 auto_light
+        UInt8 light_type
+        UInt8 avn_av
+        UInt8 avn_tbt
+        UInt8 tpms
+        UInt8 offroad
+        UInt8 sbw
+        UInt8 avn_usm_lang
+        UInt8 hda2
+    }
+
+    enumeration EnumStreerWheelKey	// Input Process
+    {
+        KEYEVT_DISP_NONE
+        KEYEVT_DISP_PRESSED                 // C_DispSW
+        KEYEVT_DISP_RELEASED
+
+        KEYEVT_SCROLL_UP_PRESSED            // C_CLUScrollUpSW
+        KEYEVT_SCROLL_UP_RELEASED           // C_CLUScrollUpSW
+        KEYEVT_SCROLL_UP_REPEAT_START       // only used in hud height/rotate/brightness
+        KEYEVT_SCROLL_UP_REPEAT_END         // only used in hud height/rotate/brightness
+
+        KEYEVT_SCROLL_DOWN_PRESSED          // C_CLUScrollDnSW
+        KEYEVT_SCROLL_DOWN_RELEASED         // C_CLUScrollDnSW
+        KEYEVT_SCROLL_DOWN_REPEAT_START     // only used in hud height/rotate/brightness
+        KEYEVT_SCROLL_DOWN_REPEAT_END       // only used in hud height/rotate/brightness
+
+        KEYEVT_OK_PRESSED                   // C_CLUScrollOk
+        KEYEVT_OK_RELEASED                  // C_CLUScrollOk
+        KEYEVT_OK_LONG                      // C_CLUScrollOkLong
+        KEYEVT_OK_LONG_5SEC                 // only used in service workshop mode init
+
+        KEYEVT_BACK_PRESSED
+        KEYEVT_BACK_RELEASED
+
+        KEYEVT_MAX
+    }
+
+    enumeration EnumIGNState
+    {
+        IGN_STATE_NONE
+        IGN_STATE_OFF
+        IGN_STATE_ON
+        IGN_STATE_MAX
+    }
+
+    enumeration EnumSpeedoUnit  // Using Speed and Distance
+    {
+        SPEEDO_UNIT_NONE
+        SPEEDO_UNIT_KM
+        SPEEDO_UNIT_MILE
+        SPEEDO_UNIT_MAX
+    }
+
+    enumeration EnumTemperatureUnit
+    {
+        TEMP_UNIT_NONE
+        TEMP_UNIT_C
+        TEMP_UNIT_F
+        TEMP_UNIT_MAX
+    }
+
+    enumeration EnumFuelUnit
+    {
+        FUEL_UNIT_NONE
+        FUEL_UNIT_KM_PER_L
+        FUEL_UNIT_L_PER_100KM
+        FUEL_UNIT_MPG_USA
+        FUEL_UNIT_MPG_UK
+        FUEL_UNIT_MAX
+    }
+
+
+
+    /////////////////////////////////////////////
+    /////////////// Main Contents ///////////////
+    /////////////////////////////////////////////
+
+    struct StTripValue8
+    {
+        EnumValueDisplayType type
+        UInt8 value
+    }
+
+    struct StTripValue16
+    {
+        EnumValueDisplayType type
+        UInt16 value
+    }
+
+    struct StTripValue32
+    {
+        EnumValueDisplayType type
+        UInt32 value
+    }
+
+    struct StTripDTEInfo
+    {
+        StTripValue16 fuel
+        StTripValue16 ev
+
+        EnumSpeedoUnit speedo_unit
+    }
+
+    struct StTripFuelEconomyInfo
+    {
+        StTripValue16 avg_fuel_eco
+        StTripValue16 instantaneous_fuel_eco
+        EnumFuelUnit unit
+
+        Boolean animation
+    }
+
+    struct StTripAccumulatedInfo
+    {
+        StTripValue32 trip_meter	// distance
+        StTripValue16 avg_fuel_eco
+        StTripValue16 elapsed_time
+        StTripValue16 avg_vehicle_speed
+
+        EnumSpeedoUnit speedo_unit
+        EnumFuelUnit fuel_unit
+    }
+
+    struct StTripDriveInfo
+    {
+        StTripValue32 trip_meter	// distance
+        StTripValue16 avg_fuel_eco
+        StTripValue16 elapsed_time
+        StTripValue16 avg_vehicle_speed
+
+        EnumSpeedoUnit speedo_unit
+        EnumFuelUnit fuel_unit
+    }
+
+    struct StTripSpeedMeter
+    {
+        StTripValue16 speed
+        EnumSpeedoUnit unit
+    }
+
+    enumeration EnumDriveMode
+    {
+        DMS_NONE
+
+        DMS_COMFORT
+        DMS_ECO
+        DMS_SPORT
+        DMS_ECOPLUS
+        DMS_REST
+        DMS_CUSTOM
+        DMS_SPORT_PLUS
+
+        DMS_SMART_COMFORT
+        DMS_SMART_ECO
+        DMS_SMART_SPORT
+        DMS_SMART_INVALID_OFF
+        DMS_SMART_4SEC_STATE
+        DMS_SMART_TIMEOUT_OFF
+
+        DMS_OFFROAD_SNOW
+        DMS_OFFROAD_SAND
+        DMS_OFFROAD_MUD
+
+        DMS_MAX
+    }
+
+    struct StDriveModeInfo
+    {
+        EnumDriveMode mode
+        EnumDriveMode telltale
+    }
+
+    struct StDriveModeBar
+    {
+        EnumValueDisplayType type
+        UInt8 value
+    }
+
+    struct StTripDriveModeInfo
+    {
+        EnumDriveMode mode
+        StDriveModeBar bar
+    }
+
+    // Trip Engine coolant temperature
+    struct StEngineCoolantTemp
+    {
+        EnumValueDisplayType type
+        EnumTemperatureUnit unit
+        UInt8 level
+    }
+
+    // Trip Power Flow
+    enumeration EnumPowerFlow
+    {
+        POWER_FLOW_OFF
+        POWER_FLOW_B_E_W
+        POWER_FLOW_W_E_B
+        POWER_FLOW_MAX
+    }
+
+    enumeration EnumTransmissionTempLevel
+    {
+        TRSM_TEMP_LEVEL_1
+        TRSM_TEMP_LEVEL_2
+        TRSM_TEMP_LEVEL_3
+        TRSM_TEMP_LEVEL_4
+        TRSM_TEMP_LEVEL_5
+        TRSM_TEMP_LEVEL_6
+        TRSM_TEMP_LEVEL_7
+        TRSM_TEMP_LEVEL_8
+        TRSM_TEMP_LEVEL_9
+        TRSM_TEMP_LEVEL_10
+        TRSM_TEMP_LEVEL_11
+        TRSM_TEMP_LEVEL_12
+        TRSM_TEMP_LEVEL_13
+        TRSM_TEMP_LEVEL_14
+        TRSM_TEMP_LEVEL_15
+        TRSM_TEMP_LEVEL_16
+        TRSM_TEMP_LEVEL_0    = 254   // 0XFE, Timeout Value
+    }
+
+    enumeration EnumTBTDisplayType
+    {
+        TBT_DISP_NONE
+        TBT_DISP_LOADING
+        TBT_DISP_FOLLOW_STREET
+        TBT_DISP_DIR_DEST_WAYPOINT
+        TBT_DISP_ARRIVED
+        TBT_DISP_NO_ROUTE_GUIDE
+        TBT_DISP_CALC_ROUTE
+        TBT_DISP_RECALC_ROUTE
+        TBT_DISP_TURN
+        TBT_DISP_EXIT_R
+        TBT_DISP_EXIT_L
+        TBT_DISP_EXIT_COMBI_R
+        TBT_DISP_EXIT_COMBI_L
+        TBT_DISP_SERVICE_ROAD_R
+        TBT_DISP_SERVICE_ROAD_L
+        TBT_DISP_FORK
+        TBT_DISP_U_TURN
+        TBT_DISP_ROUND_ABOUT_R
+        TBT_DISP_ROUND_ABOUT_L
+        TBT_DISP_OVER_PASS_R
+        TBT_DISP_OVER_PASS_L
+        TBT_DISP_UNDER_PASS_R
+        TBT_DISP_UNDER_PASS_L
+        TBT_DISP_PRELIMINARY_INFO   // TBT_Display_Type: 0x40 ~ 0xFE
+//        TBT_DISP_TOLLGATE
+        TBT_DISP_SD_CARD
+        TBT_DISP_MAX
+    }
+
+    enumeration EnumTBTPageState
+    {
+        TBT_PAGE_DISABLE
+        TBT_PAGE_ENABLE
+        TBT_PAGE_MAX
+    }
+
+    enumeration EnumTBTPointType
+    {
+        TBT_POINT_NONE
+        TBT_POINT_DEST
+        TBT_POINT_VIA_DEST_1
+        TBT_POINT_VIA_DEST_2
+        TBT_POINT_VIA_DEST_3
+        TBT_POINT_VIA_DEST_4
+        TBT_POINT_MAX
+    }
+
+    enumeration EnumTBTDistanceUnit
+    {
+        TBT_DIST_UNIT_NONE
+        TBT_DIST_UNIT_METER
+        TBT_DIST_UNIT_KILOMETER
+        TBT_DIST_UNIT_MILE
+        TBT_DIST_UNIT_FEET
+        TBT_DIST_UNIT_YARD
+        TBT_DIST_UNIT_MAX
+    }
+
+    struct StTBTDistance
+    {
+        UInt16 over_zero_point
+        UInt8 under_zero_point
+
+        EnumTBTDistanceUnit unit
+    }
+
+    struct StTBTDistDestInfo
+    {
+        EnumValueDisplayType type
+
+        StTBTDistance distance
+    }
+
+    struct StTBTTurnInfo
+    {
+        EnumValueDisplayType type
+
+        StTBTDistance distance
+        UInt8 bar
+    }
+
+    enumeration EnumTBTTimeFormat
+    {
+        TBT_TIME_FMT_NONE
+        TBT_TIME_FMT_AMPM
+        TBT_TIME_FMT_24_HOUR
+        TBT_TIME_FMT_MAX
+    }
+
+    struct StTBTDestinationTime
+    {
+        EnumValueDisplayType type
+
+        EnumTBTTimeFormat format
+
+        UInt8 hour
+        UInt8 min
+    }
+
+    struct StTBTRemainTime
+    {
+        EnumValueDisplayType type
+
+        UInt8 hour
+        UInt8 min
+    }
+
+    typedef TPData is ByteBuffer
+
+
+
+    // ##################################
+    // ### Main Contents Drive Assist ###
+    // ##################################
+
+    // NOTE: SCC/CC/NSCC/HDA
+    enumeration EnumCruiseCtrlDisplayType
+    {
+        CRUISE_CTRL_NONE
+        CRUISE_CTRL_SYSTEM_OFF
+        CRUISE_CTRL_CHECKING_SYSTEM_OFF
+
+        CRUISE_CTRL_STANDBY             // CC Disengaged
+        CRUISE_CTRL_SMART_STANDBY       // SCC Disengaged
+
+        CRUISE_CTRL_ENGAGE
+        CRUISE_CTRL_SMART_ENGAGE
+
+        CRUISE_CTRL_OVERRIDE
+        CRUISE_CTRL_SMART_OVERRIDE
+
+        CRUISE_CTRL_MAX
+    }
+
+    enumeration EnumCruiseCtrlDisplayType2
+    {
+        CRUISE_CTRL_NONE
+        CRUISE_CTRL_SYSTEM_OFF
+
+        CRUISE_CTRL_NO_CONDITION
+        CRUISE_CTRL_DISENGAGED
+        CRUISE_CTRL_PAUSE
+        CRUISE_CTRL_READY
+
+        CRUISE_CTRL_OVERRIDE
+        CRUISE_CTRL_SMART_OVERRIDE
+
+        CRUISE_CTRL_ENGAGE
+        CRUISE_CTRL_SMART_ENGAGE
+
+        CRUISE_CTRL_MAX
+    }
+
+    enumeration EnumCruiseCtrlSymbolType
+    {
+        SYMBOL_NONE
+        SYMBOL_CRUISE
+        SYMBOL_HDA
+        SYMBOL_MAX
+    }
+
+    enumeration EnumCruiseCtrlSymbolStatus
+    {
+        SYMBOL_STATUS_OFF
+        SYMBOL_STATUS_STANDBY  // Dimmed display
+        SYMBOL_STATUS_ENGAGE   // Green color display
+        SYMBOL_STATUS_MAX
+    }
+
+    enumeration EnumCruiseCtrlDispColor
+    {
+        DISP_COLOR_OFF  // Dimmed display
+        DISP_COLOR_ON
+        DISP_COLOR_MAX
+    }
+
+    enumeration EnumCruiseCtrlObjGapLevel
+    {
+        OBJECT_GAP_OFF
+        OBJECT_GAP_LV1
+        OBJECT_GAP_LV2
+        OBJECT_GAP_LV3
+        OBJECT_GAP_LV4
+        OBJECT_GAP_MAX
+    }
+
+    enumeration EnumCruiseCtrlTauGapLevel
+    {
+        TAU_GAP_OFF
+        TAU_GAP_LV1
+        TAU_GAP_LV2
+        TAU_GAP_LV3
+        TAU_GAP_LV4
+        TAU_GAP_MAX
+    }
+
+    enumeration EnumCruiseCtrlAutoDispType
+    {
+        AUTO_DISP_OFF
+        AUTO_DISP_READY
+        AUTO_DISP_ACTIVE    // Green color display
+        AUTO_DISP_MAX
+    }
+
+    enumeration EnumSCCTargetDispType
+    {
+        TARGET_DISP_NONE
+        TARGET_DISP_STANDBY
+        TARGET_DISP_NORMAL
+        TARGET_DISP_SCC_ML
+        TARGET_DISP_MAX
+    }
+
+    enumeration EnumADASDispType
+    {
+        ADAS_DISP_OFF
+        ADAS_DISP_ON
+        ADAS_DISP_MAX
+    }
+
+    enumeration EnumADASVehicleId
+    {
+        VEHICLE_ID_FRONT_LEFT
+        VEHICLE_ID_FRONT
+        VEHICLE_ID_FRONT_RIGHT
+        VEHICLE_ID_REAR_LEFT
+        VEHICLE_ID_REAR_RIGHT
+        VEHICLE_ID_GAP_SET
+        VEHICLE_ID_MAX
+    }
+
+    enumeration EnumADASVehicleStatus
+    {
+        VEHICLE_STATUS_NONE
+        VEHICLE_STATUS_RECOGNIZED
+        VEHICLE_STATUS_WARNING
+        VEHICLE_STATUS_MTC
+        VEHICLE_STATUS_FADE_OUT
+        VEHICLE_STATUS_FADE_IN
+        VEHICLE_STATUS_STANDBY
+        VEHICLE_STATUS_APPROACHING
+    }
+
+    enumeration EnumADASLaneType
+    {
+        LANE_TYPE_NONE
+        LANE_TYPE_STRAIGHT
+        LANE_TYPE_CURVE
+    }
+
+    enumeration EnumADASLCAvailStatus
+    {
+        LANE_STATUS_NONE
+        LANE_STATUS_READY
+        LANE_STATUS_WARNING
+        LANE_STATUS_UNAVAILABLE
+        LANE_STATUS_STANDBY
+    }
+
+    enumeration EnumADASLaneActive
+    {
+        LANE_ACTIVE_LEFT
+        LANE_ACTIVE_RIGHT
+        LANE_ACTIVE_STANDBY
+    }
+
+    struct StSccSetSpeed
+    {
+        EnumValueDisplayType type
+        EnumCruiseCtrlDispColor color
+        Boolean brightness  // false: dimmed
+        UInt8 v_set_dis
+    }
+
+    struct StSCCSymbol
+    {
+        EnumCruiseCtrlSymbolType item
+        EnumCruiseCtrlSymbolStatus status
+    }
+
+    struct StDriveAssistCCInfoTTC
+    {
+        EnumCruiseCtrlDisplayType disp_type
+        EnumCruiseCtrlAutoDispType disp_auto
+        StSCCSymbol symbol
+
+        StSccSetSpeed v_set_spd
+        Boolean obj_valid
+        EnumCruiseCtrlObjGapLevel obj_gap
+        EnumCruiseCtrlTauGapLevel tau_gap
+    }
+    
+    struct StCCObject
+    {
+        UInt16 x
+        UInt16 y
+        Float scale
+    }
+
+    struct StSCCVehicleInfo
+    {
+        EnumADASVehicleStatus front_vehicle_state
+        StCCObject vehicle_obj
+    }
+
+    struct StSCCTargetDistInfo
+    {
+        EnumSCCTargetDispType disp_type
+        Boolean blink
+        StCCObject target_obj
+    }
+
+    struct StDriveAssistCCInfoReal
+    {
+        EnumCruiseCtrlDisplayType2 disp_type
+
+        StSCCVehicleInfo front_vehicle
+        StSCCTargetDistInfo target
+
+        Boolean esc_brake_lamp
+    }
+
+    struct StADASVehicleInfo
+    {
+        EnumADASVehicleId vehicle_id
+        EnumADASVehicleStatus vehicle_status
+
+        StCCObject vehicle_info
+        EnumSCCTargetDispType target_dist_type
+    }
+
+    struct StADASLaneInfo
+    {
+        EnumADASLCAvailStatus l_lca_status
+        EnumADASLCAvailStatus r_lca_status
+        EnumADASLaneActive lane_active_status
+
+        EnumADASLaneType lane_type
+        UInt8 lane_curve_ratio
+
+        UInt16 l_lane_x
+        UInt16 r_lane_x
+    }
+
+    array VehicleInfoList of StADASVehicleInfo
+
+    struct StAdasInfo
+    {
+        EnumADASDispType disp_type
+
+        VehicleInfoList vehicle_info_list
+        StADASLaneInfo lane_info
+    }
+
+    // NOTE: LDW/LKA/LFA
+    enumeration EnumLaneContentsType
+    {
+        LANE_TYPE_NONE
+        LANE_TYPE_LKA
+        LANE_TYPE_LDW
+        LANE_TYPE_MAX
+    }
+
+    enumeration EnumLaneDisplayType
+    {
+        LANE_DISP_SYSTEM_OFF
+        LANE_DISP_SYSTEM_ON
+        LANE_DISP_MAX
+    }
+
+    enumeration EnumLaneState
+    {
+        LANE_STATE_OFF
+        LANE_STATE_DET
+        LANE_STATE_WARN
+        LANE_STATE_MAX
+    }
+
+    struct StDriveAssistLaneInfo
+    {
+        EnumLaneContentsType contents_type
+        EnumLaneDisplayType disp_type
+        EnumLaneState left_state
+        EnumLaneState right_state
+        Boolean sound_enable
+    }
+
+    // NOTE: DAW
+    enumeration EnumDAWDisplayType
+    {
+        DAW_DISP_OFF
+        DAW_DISP_LV1
+        DAW_DISP_LV2
+        DAW_DISP_LV3
+        DAW_DISP_LV4
+        DAW_DISP_LV5
+        DAW_DISP_STANDBY
+        DAW_DISP_FAILURE
+        DAW_DISP_MAX
+    }
+
+    struct StDAWTimeValue
+    {
+        EnumValueDisplayType type
+        UInt16 last_break_time
+    }
+
+    struct StDriveAssistDAWInfo
+    {
+        EnumDAWDisplayType disp_type
+        StDAWTimeValue time
+    }
+
+    // NOTE: ISLW
+    enumeration EnumISLWDisplayType
+    {
+        ISLW_DISP_NONE
+        ISLW_DISP_SYSTEM_OFF
+        ISLW_DISP_CAMERA_ERR_STORED
+        ISLW_DISP_NO_SPEED_INFO
+        ISLW_DISP_SPEED_INFO
+        ISLW_DISP_RELEASED
+        ISLW_DISP_MASTER_WARNING_CHECK_ISLW
+        ISLW_DISP_MAX
+    }
+
+    enumeration EnumISLWProhibitionType
+    {
+        ISLW_PROH_OFF
+        ISLW_PROH_SPEED_INFO
+        ISLW_PROH_DO_NOT_PASS
+        ISLW_PROH_DO_NOT_PASS_RHD
+        NO_PASS_MAX
+    }
+
+    enumeration EnumISLWCondSignOptionType
+    {
+        COND_SIGN_OPT_OFF
+        COND_SIGN_OPT_SNOW_RAIN
+        COND_SIGN_OPT_TRAILER
+        COND_SIGN_OPT_EMPTY
+        COND_SIGN_OPT_MAX
+    }
+
+    struct StISLWCondSignInfo
+    {
+        EnumISLWProhibitionType type
+        UInt8 limit_speed   // 0x00: Disp OFF, 0xFD: Do not pass, 0xFE: Do not pass RHD
+
+        EnumISLWCondSignOptionType option
+    }
+
+    struct StDriveAssistISLWInfo
+    {
+        EnumISLWDisplayType disp_type
+
+        UInt8 main_speed    // Data Range: 0x1 ~ 0xFC
+        EnumISLWProhibitionType add_info
+
+        StISLWCondSignInfo cond_sign_1
+        StISLWCondSignInfo cond_sign_2
+    }
+
+    // NOTE: TPMS
+    enumeration EnumTPMSDisplayType
+    {
+        TPMS_DISP_NONE
+        TPMS_DISP_NOT_DRIVING
+        TPMS_DISP_NORMAL_PRESSURE
+        TPMS_DISP_MASTER_WARNING_HIGHLINE
+        TPMS_DISP_MASTER_WARNING_LOWLINE
+        TPMS_DISP_MASTER_WARNING_FAILURE
+        TPMS_DISP_MAX
+    }
+
+    enumeration EnumTPMSPressureUnit
+    {
+        PRESS_UNIT_PSI
+        PRESS_UNIT_KPA
+        PRESS_UNIT_BAR
+        PRESS_UNIT_NO_DISP
+        PRESS_UNIT_MAX
+    }
+
+    struct StTPMSTireInfo
+    {
+        EnumValueDisplayType type
+        Boolean low_pressure
+        UInt16 pressure_psi
+        UInt16 pressure_kpa
+        Float pressure_bar
+    }
+
+    struct StDriveAssistTPMSInfo
+    {
+        EnumTPMSDisplayType disp_type
+        EnumTPMSPressureUnit unit
+
+        StTPMSTireInfo fl
+        StTPMSTireInfo fr
+        StTPMSTireInfo rl
+        StTPMSTireInfo rr
+    }
+
+    // AWD
+    enumeration EnumAWDAngle
+    {
+        AWD_ANGLE_LEFT_30
+        AWD_ANGLE_LEFT_24
+        AWD_ANGLE_LEFT_18
+        AWD_ANGLE_LEFT_12
+        AWD_ANGLE_LEFT_6
+        AWD_ANGLE_0
+        AWD_ANGLE_RIGHT_6
+        AWD_ANGLE_RIGHT_12
+        AWD_ANGLE_RIGHT_18
+        AWD_ANGLE_RIGHT_24
+        AWD_ANGLE_RIGHT_30
+    }
+
+    struct StDriveAssistAWDInfo
+    {
+        EnumAWDAngle angle
+
+        UInt8 front_level
+        UInt8 rear_level
+    }
+
+
+
+    // NOTE: Energy flow
+    // WARNING: HEV/PHEV only
+    enumeration EnumEnergyFlowDisplayType
+    {
+        ENERGY_FLOW_OFF
+        ENERGY_FLOW_B_W
+        ENERGY_FLOW_BE_W
+        ENERGY_FLOW_E_W
+        ENERGY_FLOW_E_B
+        ENERGY_FLOW_W_B
+        ENERGY_FLOW_W_E
+        ENERGY_FLOW_E_WB
+        ENERGY_FLOW_E_B_W
+        ENERGY_FLOW_EW_B
+        ENERGY_FLOW_W_EB
+        ENERGY_FLOW_MAX
+    }
+
+    struct StEnergyFlowInfo
+    {
+        EnumEnergyFlowDisplayType disp_type
+        UInt8 level
+    }
+
+    // NOTE: My Driving Mode
+    enumeration EnumMyDrvModeDispType
+    {
+        MY_DRV_DISP_NONE
+        MY_DRV_DISP_CRUISE_MODE
+        MY_DRV_DISP_ON
+        MY_DRV_DISP_MAX
+    }
+
+    enumeration EnumMyDrvModeFocus
+    {
+        MY_DRV_FOCUS_OFF
+        MY_DRV_FOCUS_ECONOMY
+        MY_DRV_FOCUS_NORMAL
+        MY_DRV_FOCUS_NO_ECONOMY
+        MY_DRV_FOCUS_MAX
+    }
+
+    struct StFuelEffValue
+    {
+        EnumValueDisplayType type
+        UInt8 FuelEff
+    }
+
+    struct StMyDrvModeInfo
+    {
+        EnumMyDrvModeDispType disp_type
+        EnumMyDrvModeFocus focus
+
+        StFuelEffValue Normal
+        StFuelEffValue Low
+        StFuelEffValue High
+    }
+
+
+
+    ////////////////////////////////////////
+    /////////////// Contents ///////////////
+    ////////////////////////////////////////
+
+    struct StContentsDTE
+    {
+        EnumValueDisplayType type
+
+        StTripValue16 dte
+        EnumSpeedoUnit unit
+    }
+
+    struct StContentsOAT
+    {
+        EnumValueDisplayType type
+
+        StTripValue8 oat
+        EnumTemperatureUnit unit
+
+        EnumValueDisplayType ice_warn
+    }
+
+    struct StContentsODO
+    {
+        StTripValue32 odo
+        EnumSpeedoUnit unit
+    }
+
+    enumeration EnumGearState
+    {
+        GEAR_STATE_NONE
+        GEAR_STATE_P
+        GEAR_STATE_R
+        GEAR_STATE_N
+        GEAR_STATE_D
+        GEAR_STATE_E
+        GEAR_STATE_S
+        GEAR_STATE_DCT_S
+        GEAR_STATE_DCT_D
+        GEAR_STATE_MAX
+    }
+
+    enumeration EnumGearTarget
+    {
+        GEAR_TARGET_NONE
+        GEAR_TARGET_1
+        GEAR_TARGET_2
+        GEAR_TARGET_3
+        GEAR_TARGET_4
+        GEAR_TARGET_5
+        GEAR_TARGET_6
+        GEAR_TARGET_7
+        GEAR_TARGET_8
+        GEAR_TARGET_MAX
+    }
+
+    enumeration EnumGearArrow
+    {
+        GEAR_ARROW_OFF
+        GEAR_ARROW_UP
+        GEAR_ARROW_DOWN
+        GEAR_ARROW_MAX
+    }
+
+    enumeration EnumGearBlinkState
+    {
+        GEAR_BLINK_STATE_OFF
+        GEAR_BLINK_STATTE_500MS     // On/Off duty 50:50
+        GEAR_BLINK_STATTE_200MS     // On/Off duty 50:50
+        GEAR_BLINK_STATTE_MAX
+    }
+
+    struct StContentsGearInfo
+    {
+        EnumGearState _state
+        EnumGearTarget _target
+        EnumGearArrow _arrow
+        EnumGearBlinkState _blink
+    }
+
+    // Contents CC
+    enumeration EnumContentsCCDispType
+    {
+        CT_CC_DISP_NONE
+        CT_CC_DISP_OFF
+        CT_CC_DISP_CHECKING_OFF
+        CT_CC_DISP_STANDBY
+        CT_CC_DISP_ENGAGED
+        CT_CC_DISP_MAX
+    }
+
+    struct StContentsCCValue
+    {
+        EnumValueDisplayType type
+        UInt8 value
+    }
+
+    struct StContentsCCInfo
+    {
+        EnumContentsCCDispType disp_type
+        StContentsCCValue speed
+    }
+
+    // Contents SCC
+    struct StContentsObjectInfo
+    {
+        Boolean enable
+        Boolean brightness  // false: dimmed
+        EnumCruiseCtrlObjGapLevel obj_gap
+    }
+
+    struct StContentsSCCDistance
+    {
+        EnumSCCTargetDispType disp_type
+        EnumCruiseCtrlTauGapLevel level
+    }
+
+    struct StContentsSCCInfo
+    {
+        EnumCruiseCtrlDisplayType2 disp_type
+        EnumCruiseCtrlAutoDispType disp_auto
+
+        StSCCSymbol symbol
+
+        StSccSetSpeed v_set_speed
+        StContentsObjectInfo vehicle
+
+        StContentsSCCDistance distance
+    }
+
+    // Contents Coasting
+    enumeration EnumContentsCoastingDispType
+    {
+        CONT_COAST_DISP_NONE
+        CONT_COAST_DISP_READY
+        CONT_COAST_DISP_ACTIVE
+        CONT_COAST_DISP_NO_SYMBOL
+        CONT_COAST_DISP_MAX
+    }
+
+    struct StContentsCoasting
+    {
+        EnumContentsCoastingDispType disp_type
+        Boolean blink
+    }
+
+    // Contents DIS
+    enumeration EnumDISDispType
+    {
+        DIS_DISP_NONE
+        DIS_DISP_NON_SPD_TRAP
+        DIS_DISP_WARN_ZONE
+        DIS_DISP_CURVE_WARN
+        DIS_DISP_SPEED_INFO
+        DIS_DISP_MAX
+    }
+
+    struct StDISSpdValue
+    {
+        EnumValueDisplayType type
+        UInt8 value
+    }
+
+    struct StDISItem
+    {
+        EnumDISDispType disp_type
+        UInt8 disp_id
+    }
+
+    array DISList of StDISItem
+
+    struct StContentsDISInfo
+    {
+	DISList list
+
+        StDISSpdValue speed
+    }
+
+    // Contents ISLW
+    struct StContentsISLWInfo
+    {
+        EnumISLWDisplayType disp_type
+        UInt8 Speed
+
+        EnumISLWProhibitionType prohibit
+        Boolean OverlapSign
+    }
+
+    // Contents Ready Display
+    enumeration EnumEcoPwrDispState
+    {
+        ECO_PWR_DISP_OFF
+        ECO_PWR_DISP_TRANSITION_TO_OFF
+        ECO_PWR_DISP_OFF_PREPARE
+        ECO_PWR_DISP_ON_PREPARE
+        ECO_PWR_DISP_TRANSITION_TO_ON
+        ECO_PWR_DISP_ON
+        ECO_PWR_DISP_MAX
+    }
+
+    // Contents RSBR
+    enumeration EnumContentsRSBRState
+    {
+        CT_RSBR_STATE_NONE
+        CT_RSBR_STATE_NO_PERSON
+        CT_RSBR_STATE_USED_NOT_BELT
+        CT_RSBR_STATE_USED_BELT
+        CT_RSBR_STATE_MAX
+    }
+
+    struct StContentsRSBRInfo
+    {
+        EnumValueDisplayType type
+
+        EnumContentsRSBRState rear_left
+        EnumContentsRSBRState rear_center
+        EnumContentsRSBRState rear_right
+    }
+
+    // Contents Speed Limiter (MSLA)
+    enumeration EnumContentsSpdLimitDispType
+    {
+        CT_SPD_LIMIT_DISP_NONE
+        CT_SPD_LIMIT_DISP_OFF
+        CT_SPD_LIMIT_DISP_STANDBY
+        CT_SPD_LIMIT_DISP_ENGAGED
+        CT_SPD_LIMIT_DISP_MAX
+    }
+
+    struct StMSLAValue
+    {
+        EnumValueDisplayType type
+        UInt8 value
+    }
+
+    struct StContentsSpdLimitInfo
+    {
+        EnumContentsSpdLimitDispType disp_type
+        StMSLAValue speed
+    }
+
+    //////////////////////////////////////////////
+    /////////////// Event Contents ///////////////
+    //////////////////////////////////////////////
+    enumeration EnumEventDisplayType
+    {
+        EVT_DISP_NONE
+        EVT_DISP_FULL
+        EVT_DISP_CUSTOM
+        EVT_DISP_MID
+        EVT_DISP_MINI
+        EVT_DISP_CONTENTS
+        EVT_DISP_MAX
+    }
+
+    enumeration EnumFactoryScreenType
+    {
+        LCD_PATTERN_NONE
+        LCD_PATTERN_RED
+        LCD_PATTERN_GREEN
+        LCD_PATTERN_BLUE
+        LCD_PATTERN_VERTICAL
+        LCD_PATTERN_HORIZONTAL
+        LCD_PATTERN_BLACK
+        LCD_PATTERN_WHITE
+        LCD_PATTERN_MAX
+    }
+
+    enumeration EnumEventID
+    {
+        eDispId_ScreenOff                               = 0
+
+        /** Group 0 **/
+        eDispId_System_Check                            = 1
+        eDispId_EOL_Error                               = 2
+        eDispId_Welcome                                 = 3
+        eDispId_SMK_P_IgnOff                            = 4
+        eDispId_Wireless_Charger                        = 5     // WPC
+        eDispId_SunroofWindowHood_Open                  = 6
+        eDispId_Goodbye                                 = 7
+        eDispId_SBW_VCU2_Warn_IgnOff                    = 8
+        eDispId_CheckPattern                            = 9
+        eDispId_SEA_IgnOff                              = 10    // Type 2
+        eDispId_Gear_Engaged_IgnOff                     = 11
+        eDispId_RearSeatAlarm_Clear                     = 12
+        eDispId_RearSeatAlarm_Alarm                     = 13
+        eDispId_Batt_LowTemp_IgnOff                     = 14
+        eDispId_SBW_scuNMode_IgnOff                     = 15
+        eDispId_UpdateMode                              = 16
+
+
+        /** Group 1 **/
+        eDispId_FCA_Warn                                = 20    // FCA
+        eDispId_Engine_HighTemp                         = 21
+        eDispId_EMS_SafetyFunction                      = 22
+        eDispId_DoorHood_Moving_Open                    = 23
+        eDispId_Batt_HighTemp                           = 24
+        eDispId_CheckHevEngine                          = 25
+        eDispId_CheckPowerSupply                        = 26
+        eDispId_AHB_CheckStop                           = 27
+        eDispId_UREA_Abnormal3_Check3                   = 28    // SCR
+        eDispId_UREA_Shortage4                          = 29    // SCR
+        eDispId_UREA_Abnormal2_Check2                   = 30    // SCR
+        eDispId_UREA_Abnormal1_Check1_Stop              = 31    // SCR
+        eDispId_LowBatToPGear                           = 32
+        eDispId_FCA_Warn_byScc                          = 33
+        eDispId_SBW_ShiftFail                           = 34
+        eDispId_SEA_IgnOn                               = 35    // Type 2
+        eDispId_FCA_LO                                  = 36
+        eDispId_FCA_wESA                                = 37
+        eDispId_FCA_LS                                  = 38
+        eDispId_BCW_Warn                                = 39
+        eDispId_BCA_R                                   = 40
+        eDispId_BCA_R_PLUS                              = 41
+
+        /** Group 2-Exception **/
+        eDispId_BVM                                     = 54
+
+        /** Group 2-Full **/
+        eDispId_Rheostat                                = 55
+        eDispId_TPMS_SavedNoti                          = 56
+        eDispId_Light                                   = 57    // MFSW_Light
+        eDispId_FrontWiper                              = 58    // MFSW_Front Wiper
+        eDispId_RearWiper                               = 59    // MFSW_Rear Wiper
+        eDispId_Gear_Engaged_IgnOn                      = 60
+        eDispId_SBW_VCU2_Warn_IgnOn                     = 61
+        eDispId_SBW_VCU1_Warn                           = 62
+        eDispId_12VBatteryReset                         = 63
+        eDispId_ADAS_SettingMode                        = 64
+        eDispId_AirCleaning_Onoff                       = 65
+        eDispId_DMS_Fail                                = 66
+        eDispId_FCEV_Regenerate                         = 67
+        eDispId_DriveMode_Full                          = 68
+        eDispId_CSCD_ModeChanged_Full                   = 69
+        eDispId_DriveMode_Error                         = 70
+
+        /** Group 2-Mini **/
+        eDispId_IMS                                     = 75
+        eDispId_AV_Mode                                 = 76
+        eDispId_FlexSteer                               = 77
+        eDispId_2StepESC_Off                            = 78
+        eDispId_SCC_ModeChange                          = 79
+        eDispId_BCW_Onoff                               = 80
+        eDispId_CSCD_ModeChanged_Mini                   = 81
+        eDispId_DBC_Onoff                               = 82
+        eDispId_4WD_Onoff                               = 83
+        eDispId_DriveMode_Mini                          = 84
+
+        /** Group 3 **/
+        eDispId_PA_ModeChange                           = 90
+
+        /** Group 4 **/
+        eDispId_DBC_Cancel                              = 95
+        eDispId_Shift_P_ToCharge                        = 96
+        eDispId_CheckHevNoStart                         = 97
+        eDispId_2WD_Mode                                = 98
+        eDispId_ExhaustGas_TestMode                     = 99
+        eDispId_TPMS_Virgin                             = 100
+        eDispId_DCT_LimpHome                            = 101
+        eDispId_DCT_OverHeat                            = 102
+        eDispId_DCT_HillHold                            = 103
+        eDispId_HDA_Cancel                              = 104
+        eDispId_SCC_Popup                               = 105
+        eDispId_LKAS_HandsOn_Lv1                        = 106
+        eDispId_LKAS_HandsOn_Lv2_Sound                  = 107
+        eDispId_LKAS_Cancel                             = 108
+        eDispId_Attention_Assist                        = 109   // DAW
+        eDispId_EPB_Infinite                            = 110
+        eDispId_ISG_Start                               = 111
+        eDispId_PA                                      = 112
+        eDispId_PAS                                     = 113   // Modified Name: PDW
+        eDispId_RCTA                                    = 114   // Modified Name: RCCW
+        eDispId_DCT_CoolingFinish                       = 115
+        eDispId_ISG_CancelBrakeClutch                   = 116
+        eDispId_StopToChargeBattery                     = 117
+        eDispId_InverterCoolant_Refill                  = 118
+        eDispId_AHB_Check                               = 119
+        eDispId_PowerDown                               = 120
+        eDispId_LowBatt_Lv2                             = 121
+        eDispId_Batt_LowTemp                            = 122
+        eDispId_PowerLimit                              = 123
+        eDispId_UREA_Shortage2_3                        = 124   // SCR
+        eDispId_HDA_HandsOff2                           = 125
+        eDispId_DCT_HighTemp                            = 126
+        eDispId_SCC_SwitchControl                       = 127   // SCC front Vehicle Departure notice
+        eDispId_LKAS_HandsOn_Lv2                        = 128
+        eDispId_LeadVehicleDeparted                     = 129
+        eDispId_DCT_Cooling                             = 130
+        eDispId_HDA_HandsOff1                           = 131
+        eDispId_HDA_Check_OLD                           = 132
+        eDispId_NCC                                     = 133
+        eDispId_HDA_SCCMode                             = 134
+        eDispId_RegenerateFail                          = 135
+        eDispId_MDPS                                    = 136
+        eDispId_HDA_HDAMode                             = 137
+        eDispId_RCCA                                    = 138
+        eDispId_HDA_ON_REQ                              = 139
+
+        /** Group 5 **/
+        eDispId_SBW_Engaged_N                           = 160
+        eDispId_BCM_Warning_P                           = 161
+        eDispId_SMK_P_IgnOn                             = 162
+        eDispId_BCM_Warning                             = 163
+        eDispId_SMK_ExceptParking                       = 164
+        eDispId_BCM_Warning_Engine                      = 165
+        eDispId_Remove_Charge                           = 166
+        eDispId_PHEVFuelTank_Charging                   = 167
+        eDispId_CSCD_Mode_AutoChange                    = 168
+        eDispId_Engine_AutoStop                         = 169   // Turn Off Auto
+        eDispId_Heated_Wire_Cancel                      = 170   // Heating Steer Auto Off
+        eDispId_Charging_Alarm                          = 171
+        eDispId_AuxBattSaverPlus                        = 172
+        eDispId_FCEV_ChargeFinish                       = 173
+        eDispId_FCEV_CheckFuelInlet                     = 174
+        eDispId_ChargeDoor_Open                         = 175
+        eDispId_SEA_Operation_fail                      = 176   // Type 1
+        eDispId_SEA_Operation_noti                      = 177   // Type 1
+        eDispId_SBW_scuNMode_IgnOn                      = 178
+        eDispId_PHEVFuelTank_WaitOrFuel                 = 179
+        eDispId_SMK_Shift_N_Start                       = 180
+        eDispId_SMK_iMT_Start                           = 181
+
+        /** Group 6 **/
+        eDispId_TCF                                     = 190
+        eDispId_Service_Reminder                        = 191
+        eDispId_BatteryDischargeWarning                 = 192
+
+        /** Factory Mode (Screen Test) **/
+        eDispId_FactoryScreen                           = 199
+
+        /** Group 7 **/
+        eDispId_AAF_Fail                                = 200
+        eDispId_LEDHeadLamp_Fail                        = 201
+        eDispId_PSB_Fail                                = 202
+        eDispId_BCA_Fail                                = 203
+        eDispId_BCW_Fail                                = 204   // Modified Name: BCW
+        eDispId_TPMS_Warn                               = 205
+        eDispId_SCC_SystemFail                          = 206
+        eDispId_FCA_Fail                                = 207   // FCA
+        eDispId_FCW_Fail                                = 208
+        eDispId_BCW_Blockage                            = 209   // Modified Name: BCW
+        eDispId_SCC_Blockage                            = 210
+        eDispId_FCA_Blockage                            = 211   // FCA
+        eDispId_LKAS_Fail                               = 212
+        eDispId_EVSystem_Check                          = 213
+        eDispId_PA_Fail                                 = 214
+        eDispId_PAS_Fail                                = 215   // Modified Name: PDW
+        eDispId_NormalChargeError                       = 216   // External Charge Fail
+        eDispId_ECS_Fail                                = 217
+        eDispId_LowEngineOil                            = 218
+        eDispId_CoolingWaterFilter_Check                = 219
+        eDispId_LowWasher                               = 220
+        eDispId_DPF_Fail                                = 221
+        eDispId_StopLamp_Fail                           = 222
+        eDispId_HighMountedStopLamp_Fail                = 223
+        eDispId_HeadLamp_Bifunc_Fail                    = 224
+        eDispId_HeadLamp_Low_Fail                       = 225
+        eDispId_StaticBendingLamp_Fail                  = 226
+        eDispId_DynamicBendingLamp_Fail                 = 227
+        eDispId_HeadLamp_High_Fail                      = 228
+        eDispId_DayLightLamp_Fail                       = 229
+        eDispId_FogLamp_Fail                            = 230
+        eDispId_TailLamp_Fail                           = 231
+        eDispId_PositionLamp_Fail                       = 232
+        eDispId_TurnSignalLamp_Fail                     = 233
+        eDispId_LicensePlateLamp_Fail                   = 234
+        eDispId_Haptic_Fail                             = 235
+        eDispId_Refuel                                  = 236
+        eDispId_HDA_Check                               = 237
+        eDispId_LowFuel                                 = 238
+        eDispId_UREA_Shortage1                          = 239   // SCR
+        eDispId_LowBatt_Lv1                             = 240
+        eDispId_VESS_Fail                               = 241
+        eDispId_ISLW_Fail                               = 242
+        eDispId_HBA_Fail                                = 243
+        eDispId_FCW_Blockage                            = 244
+        eDispId_ISLW_Blockage                           = 245
+        eDispId_RemainChargeTime                        = 246
+        eDispId_ExtFastCharge_Fail                      = 247   // External Charge Fail
+        eDispId_ExtSlowCharge_Fail                      = 248   // External Charge Fail
+        eDispId_CheckHev                                = 249
+        eDispId_FuelRunOut                              = 250
+        eDispId_ChargeDoor_OpenMoving                   = 251
+        eDispId_ParasiticCurrent                        = 252   // ICU Power AutoCut Mode
+        eDispId_PHEVFuelTank_CheckOrOpen                = 253
+        eDispId_SBW_LVR_Fail                            = 254
+        eDispId_IceWarning                              = 255
+        eDispId_SCUOverHeat                             = 256
+        eDispId_CheckDiffGear                           = 257
+        eDispId_CoolingWater_Refill                     = 258
+        eDispId_OilFilter_Check                         = 259
+        eDispId_CheckBrake_ABSESC                       = 260   // Brake Malfunction Warning
+        eDispId_CheckBrake_BrakeFluid                   = 261   // Brake Malfunction Warning
+        eDispId_Check48VePT                             = 262
+        eDispId_CheckTireDiff                           = 263
+        eDispId_CheckBrake_VacuumPump                   = 264   // Brake Malfunction Warning
+        eDispId_FCEV_FuelCellFCEVCoolantShortage        = 265
+        eDispId_EV_Ready                                = 266
+        eDispId_RegenBrakeSystem_Fail                   = 267
+        eDispId_TPMS_Warn_Inform                        = 268
+        eDispId_CheckRearSeatAlarm                      = 269
+        eDispId_SBW_LVR_Fail_IgnOff                     = 270
+        eDispId_BCW_Off_Noti                            = 271
+        eDispId_BCA_Blockage                            = 272
+
+        /** Group 8 **/
+        eDispId_DoorTrunkHood_Stopped_Open              = 294
+
+
+        /** GroupTab **/
+        eDispId_GroupTab                                = 295
+
+
+        /** Mobis MAX **/
+        eDispId_MobisMax                                = 296
+
+
+        /** Custom ID **/
+        eDispId_Custom_Accessory                        = 512
+        eDispId_Custom_PTG_Speed_Change_Fail            = 513
+        eDispId_Custom_Service_Interval_Setting         = 514
+        eDispId_Custom_Service_Interval_Save            = 515
+        eDispId_Custom_Service_Interval_Save_Complete   = 516
+        eDispId_Custom_USM_Reset_Save                   = 517
+        eDispId_Custom_USM_Reset_Compolete              = 518
+        eDispId_Custom_USM_Help_Message                 = 519
+        eDispId_Custom_USM_Voice_Guidance_Volume        = 520
+        eDispId_Custom_USM_Park_Assist_Volume           = 521
+        eDispId_Custom_USM_Service_Interval_reset       = 522
+        eDispId_Custom_USM_On_Driving                   = 523
+        eDispId_Custom_USM_PowerTrunk_Activate          = 524
+        eDispId_Custom_USM_Service_Workshop             = 525
+        eDispId_Custom_PA_Tab_Info                      = 526
+        eDispId_Custom_Digital_SpeedMeter               = 527
+
+
+
+        eDispId_Custom_Close_Popup                      = 528
+
+        /** MAX **/
+        eDispId_Max                                     = 529
+    }
+
+    typedef EventData is ByteBuffer
+
+    array MasterWarnTable of UInt16
+
+    enumeration EnumMasterWarnCmd
+    {
+        MASTER_WARN_CMD_NONE
+        MASTER_WARN_CMD_MOVE_TO_TAB
+        MASTER_WARN_CMD_MOVE_TO_FIRST_PAGE
+        MASTER_WARN_CMD_MAX
+    }
+
+    struct StEventContentsInfo
+    {
+        EnumEventDisplayType type
+        EnumEventID id
+        Boolean master_warn
+
+        EventData data
+    }
+
+    // ########################
+    // ### EventData syntax ###
+    // ########################
+    // ### NOTE (Chris.Ahn): Should be referenced inc/display_struct_external.h (released by MOBIS)
+
+    // eDispId_4WD_Onoff        --> fwdLockInfo
+    // eDispId_BCA_R            --> bcaInfo
+    // eDispId_BCM_Warning_P    --> bcmPInfo
+    // eDispId_BCW_Onoff        --> bcwOnoffInfo
+    // eDispId_CheckBrake_ABSESC    --> brakeAEBESCInfo
+    // eDispId_CSCD_ModeChanged     --> cscdModeChangeInfo
+    // eDispId_CSCD_Mode_AutoChange --> cscdModeChangeAutoInfo
+    // eDispId_SCC_ModeChange   --> sccModeInfo
+    // eDispId_SCC_Popup        --> sccPopupInfo
+    // eDispId_SCC_SwitchControl    -->sccUnlimited
+    // eDispId_DBC_Onoff        --> dbcOnoffInfo
+    // eDispId_EPB_Infinite     --> epbInfo
+    // eDispId_2StepESC_Off     --> escInfo
+    // eDispId_FCA_Blockage     --> fcaBlockageInfo
+    // eDispId_FCA_LO           --> fcaLoInfo
+    // eDispId_Gear_Engaged_IgnOn   --> gearEngagedInfoIgnOn
+    // eDispId_Gear_Engaged_IgnOff  --> gearEngagedInfoIgnOff
+    // eDispId_IMS              --> imsInfo
+    // eDispId_ISG_CancelBrakeClutch    --> isgCancelBrakeClutchInfo
+    // eDispId_LKAS_Cancel      --> lkasLdwsCheckInfo
+    // eDispId_LKAS_Fail        --> lkasLdwsCheckInfo    
+    // eDispId_HDA_Cancel       --> hdaCancelInfo
+    // eDispId_HDA_Check        --> hdaCheckInfo
+    // eDispId_NCC              --> nccInfo
+    // eDispId_PA_ModeChange    --> paModeChangeInfo    
+    // eDispId_PHEVFuelTank_WaitOrFuel  --> phevFuelTankInfo_waitFuel
+    // eDispId_PHEVFuelTank_CheckOrOpen --> phevFuelTankInfo_checkOpen
+    // eDispId_SMK_P_IgnOn      --> smkParkingIgnOnInfo
+    // eDispId_SMK_P_IgnOff     --> smkParkingIgnOffInfo
+    // eDispId_SMK_ExceptParking    --> smkInfo
+    // eDispId_TPMS_Virgin      --> tpmsVirgin
+    // eDispId_DCT_Cooling      --> dctCoolingInfo
+
+    // eDispId_SEA_IgnOff       --> seaIgnOffInfo
+    // eDispId_SEA_IgnOn       --> seaIgnOnInfo
+
+    // eDispId_FCA_Warn        --> fcaWarnInfo
+
+
+
+    // eDispId_Goodbye          --> ST_GOODBYE_INFO
+
+
+
+    // ### NOTE (Chris.Ahn): Should be referenced by inc/cluster_data_definition.h
+    // eDispId_2WD_Mode         --> St2WDInfo
+    // eDispId_AV_Mode          --> StEvtCtsAVInfo
+    // eDispId_DriveMode_Full   --> StEvtCtsDMS
+    // eDispId_Rheostat         --> StEvtCtsRehostat
+
+    // eDispId_PAS
+    // eDispId_PAS_Fail
+    // eDispId_RCCA
+    // eDispId_RCTA             --> StEvtCtsRCCxPDWInfo
+
+    // eDispId_StopLamp_Fail
+    // eDispId_HighMountedStopLamp_Fail
+    // eDispId_StaticBendingLamp_Fail
+    // eDispId_DynamicBendingLamp_Fail
+    // eDispId_DayLightLamp_Fail
+    // eDispId_FogLamp_Fail
+    // eDispId_TailLamp_Fail
+    // eDispId_PositionLamp_Fail
+    // eDispId_TurnSignalLamp_Fail
+    // eDispId_LicensePlateLamp_Fail    --> StEvtCtsLampFail
+
+    // eDispId_RemainChargeTime     --> StEvtChargeTime
+    // eDispId_ParasiticCurrent     --> StEvtICUPowerInfo
+
+    // eDispId_FrontWiper
+    // eDispId_Light
+    // eDispId_RearWiper        --> StEvtMFSWInfo
+
+    // eDispId_UREA_Shortage2_3     --> StEvtSCRInfo / stUreaShortageInfo
+    // eDispId_UREA_Abnormal1_Check1_Stop   --> StEvtSCRInfo / stUreaLv1WarnInfo
+    // eDispId_UREA_Abnormal2_Check2   --> StEvtSCRInfo / stUreaLv2WarnInfo
+    // eDispId_UREA_Abnormal3_Check3   --> StEvtSCRInfo / ureaLv3WarnInfo
+
+    // eDispId_DoorTrunkHood_Stopped_Open
+    // eDispId_SunroofWindowHood_Open
+    // eDispId_DoorHood_Moving_Open     --> StEvtCtsDoorWindow
+
+    // eDispId_PA                       --> StEvtPAInfo
+
+    // eDispId_Service_Reminder         --> StEvtCtsServiceReminder
+
+    // eDispId_TPMS_Warn
+    // eDispId_TPMS_Warn_Inform         --> StEvtCtsTMPSInfo
+
+
+
+    struct StSoundInfo {
+        UInt8 sound_id
+        UInt8 sound_volume
+        UInt8 sound_state
+    }
+
+    enumeration USM_DRIVER_ASSIST_SCC_REACTION_VALUE
+    {
+        NOT_APPLIED
+        SLOW
+        NORMAL
+        FAST
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_LEADING_DEPARTURE_ALERT_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_LANE_FOLLOWING_ASSIST_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_DRIVING_ASSIST_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_AUTO_SPEED_ZONE_SLOWDOWN_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_AUTO_CURVE_SLOWDOWN_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVING_ASSIST_SPEED_LIMIT_WARNING_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_DRIVER_ATTENTION_WARNING_VALUE {
+        NOT_APPLIED
+        OFF
+        LOW
+        NORMAL
+        HIGH
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_WARNING_TIMING_VALUE {
+        NOT_APPLIED
+        SLOW
+        NORMAL
+        FAST
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_WARNING_VOLUME_VALUE {
+        NOT_APPLIED
+        VOLUME_1
+        VOLUME_2
+        VOLUME_3
+        OFF
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_LANE_SAFETY_VALUE {
+        NOT_APPLIED
+        ACTIVE_LKA
+        LKA
+        LDW
+        OFF
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_LANE_SAFETY_MODE_VALUE {
+        UNKNOWN
+        WITH_ACTIVE_LKA
+        WITH_LKA
+        LDW_ONLY
+    }
+
+    enumeration USM_DRIVER_ASSIST_FORWARD_SAFETY_VALUE {
+        NOT_APPLIED
+        OFF
+        WARNING
+        ASSIST
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_BLIND_SPOT_SAFETY_SPOT_VIEW_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_BLIND_SPOT_SAFETY_SAFETY_EXIT_ASSIST_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_BLIND_SPOT_SAFETY_WARNING_ONLY_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DRIVER_ASSIST_BLIND_SPOT_SAFETY_REAR_CROSS_TRAFFIC_SAFETY_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_AUTO_LOCK_VALUE { // guide 필요
+        NOT_APPLIED
+        OFF
+        ENABLE_ON_SHIFT
+        ENABLE_ON_DRIVING
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_AUTO_UNLOCK_KEY_OR_POWER_VALUE {
+        UNKNOWN
+        KEY_OUT
+        POWER_OFF
+    }
+
+    enumeration USM_DOOR_AUTO_UNLOCK_VALUE { // guide 필요
+        NOT_APPLIED
+        OFF
+        ON_KEY_OUT
+        ON_POWER_OFF
+        ON_SHIFT
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_HORN_FEEDBACK_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_POWER_TAILGATE_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_POWER_TAILGATE_SPEED_VALUE {
+        NOT_APPLIED
+        NORMAL
+        FAST
+        DEACTIVE
+    }
+
+    enumeration USM_DOOR_SMART_TAILGATE_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_LIGHTS_ONE_TOUCH_TURN_SIGNAL_VALUE {
+        NOT_APPLIED
+        OFF
+        TIMES_3
+        TIMES_5
+        TIMES_7
+        DEACTIVE
+    }
+
+    enumeration USM_LIGHTS_AMBIENT_LIGHT_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_LIGHTS_HEADLIGHT_DELAY_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_LIGHTS_HIGH_BEAM_ASSIST_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_SOUND_CLUSTER_VOICE_GUIDANCE_VOLUME_VALUE {
+        NOT_APPLIED
+        VOLUME_0
+        VOLUME_1
+        VOLUME_2
+        VOLUME_3
+        DEACTIVE
+    }
+
+    enumeration USM_SOUND_PARK_ASSIST_VOLUME_VALUE {
+        NOT_APPLIED
+        VOLUME_1
+        VOLUME_2
+        VOLUME_3
+        DEACTIVE
+    }
+
+    enumeration USM_SOUND_WELCOME_SOUND_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_SEAT_EASY_ACCESS_VALUE {
+        NOT_APPLIED
+        OFF
+        NORMAL
+        EXTENDED
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_WELCOME_MIRROR_LIGHT_TITLE_VALUE {
+        NOT_APPLIED
+        MIRROR_AND_LIGHT
+        MIRROR_ONLY
+        LIGHT_ONLY
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_WELCOME_MIRROR_LIGHT_ON_DOOR_UNLOCK_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_WELCOME_MIRROR_LIGHT_ON_DRIVER_APPROACH_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_MIRROR_AUTO_FOLDING_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_WIRELESS_CHARGING_SYSTEM_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_TRAFFIC_INFORMATION_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_WIPER_LIGHTS_DISPLAY_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_AUTO_REAR_WIPER_IN_R_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_GEAR_POSITION_POPUP_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_CONVENIENCE_ICY_ROAD_WARNING_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_SERVICE_INTERVAL_MODE_VALUE {
+        UNKNOWN
+        CUSTOMER
+        WORKSHOP
+    }
+
+    enumeration USM_SERVICE_INTERVAL_ENABLE_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_FUEL_ECONOMY_RESET_VALUE {
+        NOT_APPLIED
+        OFF
+        AFTER_IGNITION
+        AFTER_REFUELING
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_FUEL_ECONOMY_UNIT_VALUE {
+        NOT_APPLIED
+        KM_L
+        L_100KM
+        US_GALLON
+        UK_GALLON
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_TEMPERATURE_UNIT_VALUE {
+        NOT_APPLIED
+        UNIT_C
+        UNIT_F
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_TIRE_PRESSURE_UNIT_VALUE {
+        NOT_APPLIED
+        PSI
+        KPA
+        BAR
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_SPEED_UNIT_VALUE {
+        NOT_APPLIED
+        KMH
+        MPH
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_TORQUE_UNIT_VALUE {
+        NOT_APPLIED
+        NM
+        LB_FT
+        DEACTIVE
+    }
+
+    enumeration USM_OTHER_TURBO_BOOST_PRESSURE_UNIT_VALUE {
+        NOT_APPLIED
+        PSI
+        KPA
+        BAR
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_GREEN_ZONE_EV_DRIVE_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_COASTING_GUIDE_ENABLE_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_COASTING_GUIDE_SOUND_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_START_COASTING_VALUE {
+        NOT_APPLIED
+        EARLY
+        NORMAL
+        LATER
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_CHARGING_CONNECTOR_LOCKING_MODE_VALUE {
+        NOT_APPLIED
+        WHILE_CHARGING
+        ALWAYS
+        DO_NOT_LOCK
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_CHARGING_CONNECTOR_CONDITION {
+        UNKNOWN
+        WITH_NOT_USED
+        WITHOUT_NOT_USED
+    }
+
+    enumeration USM_ECO_VEHICLE_AUXILIARY_BATTERY_SAVER_PLUS_VALUE {
+        NOT_APPLIED
+        OFF
+        ON
+        DEACTIVE
+    }
+
+    enumeration USM_ECO_VEHICLE_VOLUME_CONTROL_FUNCTION_FOR_VESS_VALUE {
+        NOT_APPLIED
+        VOLUME_1
+        VOLUME_2
+        VOLUME_3
+        VOLUME_4
+        DEACTIVE
+    }
+
+
+
+
+    enumeration USM_LANGUAGE_VALUE {
+        NOT_APPLIED
+        KOREAN
+        ENGLISH_US
+        ENGLISH_UK
+        SIMPLIFIED_CHINESE
+        TRADITIONAL_CHINESE
+        FRENCH_EU
+        SPANISH_EU
+        ARABIC
+        CZECH
+        DANISH
+        GERMAN
+        ITALIAN
+        DUTCH
+        POLISH
+        PORTUGUESE
+        RUSSIAN
+        SLOVAK
+        SWEDISH
+        TURKISH
+        FRENCH_US
+        SPANISH_US
+        ENGLISH_INDIA
+        NORWEGIAN
+        FINNISH
+        INDONESIAN
+        BRAZILIAN_PORTUGUESE
+        MALAY
+        HUNGARIAN
+        ENGLISH_AUSTRALIA
+        JAPANESE
+        DEACTIVE
+    }
+
+    enumeration USMItemIndex {
+        NONE
+        DRIVER_ASSIST_SCC_REACTION
+        DRIVER_ASSIST_DRIVING_ASSIST_LEADING_VEHICLE_DEPARTURE_ALERT
+        DRIVER_ASSIST_DRIVING_ASSIST_LANE_FOLLOWING_ASSIST
+        DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_DRIVING_ASSIST
+        DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_AUTO_SPEED_ZONE_SLOWDOWN
+        DRIVER_ASSIST_DRIVING_ASSIST_HIGHWAY_AUTO_CURVE_SLOWDOWN
+        DRIVER_ASSIST_DRIVING_ASSIST_SPEED_LIMIT_WARNING
+        DRIVER_ASSIST_DRIVER_ATTENTION_WARNING
+        DRIVER_ASSIST_WARNING_TIMING
+        DRIVER_ASSIST_WARNING_VOLUME
+        DRIVER_ASSIST_LANE_SAFETY
+        DRIVER_ASSIST_LANE_SAFETY_MODE
+        DRIVER_ASSIST_FORWARD_SAFETY
+        DRIVER_ASSIST_BLIND_SPOT_SAFETY_SPOT_VIEW
+        DRIVER_ASSIST_BLIND_SPOT_SAFETY_SAFETY_EXIT_ASSIST
+        DRIVER_ASSIST_BLIND_SPOT_SAFETY_WARNING_ONLY
+        DRIVER_ASSIST_BLIND_SPOT_SAFETY_REAR_CROSS_TRAFFIC_SAFETY
+        DOOR_AUTO_LOCK
+        DOOR_AUTO_UNLOCK_KEY_OR_POWER
+        DOOR_AUTO_UNLOCK
+        DOOR_HORN_FEEDBACK
+        DOOR_POWER_TAILGATE
+        DOOR_POWER_TAILGATE_SPEED
+        DOOR_SMART_TAILGATE
+        LIGHTS_ONE_TOUCH_TURN_SIGNAL
+        LIGHTS_AMBIENT_LIGHT
+        LIGHTS_HEADLIGHT_DELAY
+        LIGHTS_HIGH_BEAM_ASSIST
+        SOUND_CLUSTER_VOICE_GUIDANCE_VOLUME
+        SOUND_PARK_ASSIST_VOLUME
+        SOUND_WELCOME_SOUND
+        CONVENIENCE_SEAT_EASY_ACCESS
+        CONVENIENCE_WELCOME_MIRROR_LIGHT_TITLE
+        CONVENIENCE_WELCOME_MIRROR_LIGHT_ON_DOOR_UNLOCK
+        CONVENIENCE_WELCOME_MIRROR_LIGHT_ON_DRIVER_APPROACH
+        CONVENIENCE_MIRROR_AUTO_FOLDING
+        CONVENIENCE_WIRELESS_CHARGING_SYSTEM
+        CONVENIENCE_TRAFFIC_INFORMATION
+        CONVENIENCE_WIPER_LIGHTS_DISPLAY
+        CONVENIENCE_AUTO_REAR_WIPER_IN_R
+        CONVENIENCE_GEAR_POSITION_POPUP
+        CONVENIENCE_ICY_ROAD_WARNING
+        SERVICE_INTERVAL_MODE
+        SERVICE_INTERVAL_ENABLE_SERVICE_INTERVAL
+        SERVICE_INTERVAL_ADJUST_INTERVAL_DISTANCE
+        SERVICE_INTERVAL_ADJUST_INTERVAL_DURATION
+        SERVICE_INTERVAL_RESET
+        OTHER_FUEL_ECONOMY_RESET
+        OTHER_FUEL_ECONOMY_UNIT
+        OTHER_TEMPERATURE_UNIT
+        OTHER_TIRE_PRESSURE_UNIT
+        OTHER_SPEED_UNIT
+        OTHER_TORQUE_UNIT
+        OTHER_TURBO_BOOST_PRESSURE_UNIT
+        ECO_VEHICLE_GREEN_ZONE_EV_DRIVE
+        ECO_VEHICLE_COASTING_GUIDE_ENABLE
+        ECO_VEHICLE_COASTING_GUIDE_SOUND
+        ECO_VEHICLE_START_COASTING
+        ECO_VEHICLE_CHARGING_CONNECTOR_LOCKING_MODE
+        ECO_VEHICLE_CHARGING_CONNECTOR_CONDITION
+        ECO_VEHICLE_AUXILIARY_BATTERY_SAVER_PLUS
+        ECO_VEHICLE_VOLUME_CONTROL_FUNCTION_FOR_VESS
+        LANGUAGE
+        MAX
+    }
+
+    enumeration SetUSMResult
+    {
+        SUCCESS
+        FAIL_SPECIFICATION_NOT_APPLIED
+        FAIL_RANGE_INAPPROPRIATE
+        FAIL_WHILE_OTHER_WORK
+        FAIL_INVALID_INDEX_TYPE
+        FAIL_NOT_AUTHORIZED
+    }
+
+    struct USMItem32 {
+        USMItemIndex index
+        Int32 value
+    }
+
+    struct USMServiceReminder {
+        UInt32 distance
+        UInt16 duration
+        Int32 remain_duration
+        Int32 remain_distance
+    }
+
+    typedef CmdData is ByteBuffer
+
+    enumeration TabIndex {
+        UNKNOWN
+        TRIP
+        TBT
+        ASSIST
+        USM
+        INFO
+    }
+
+    struct GroupTabInfo {
+        TabIndex tab_index
+        UInt8 trip_page_index
+        UInt8 tbt_page_index
+        UInt8 assist_page_index
+    }
+}

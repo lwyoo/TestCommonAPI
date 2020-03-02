@@ -7,8 +7,8 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V0_COMMONAPI_EXAMPLES_HELLO_WORLD_HPP_
-#define V0_COMMONAPI_EXAMPLES_HELLO_WORLD_HPP_
+#ifndef V1_PROJ_DCLUSTER_MCUMANAGER_MCU_MANAGER_HPP_
+#define V1_PROJ_DCLUSTER_MCUMANAGER_MCU_MANAGER_HPP_
 
 
 
@@ -21,36 +21,38 @@
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
-namespace v0 {
-namespace commonapi {
-namespace examples {
+namespace v1 {
+namespace proj {
+namespace dcluster {
+namespace McuManager {
 
-class HelloWorld {
+class McuManager {
 public:
-    virtual ~HelloWorld() { }
+    virtual ~McuManager() { }
 
     static inline const char* getInterface();
     static inline CommonAPI::Version getInterfaceVersion();
 };
 
-const char* HelloWorld::getInterface() {
-    return ("commonapi.examples.HelloWorld:v0_1");
+const char* McuManager::getInterface() {
+    return ("proj.dcluster.McuManager.McuManager:v1_0");
 }
 
-CommonAPI::Version HelloWorld::getInterfaceVersion() {
-    return CommonAPI::Version(0, 1);
+CommonAPI::Version McuManager::getInterfaceVersion() {
+    return CommonAPI::Version(1, 0);
 }
 
 
-} // namespace examples
-} // namespace commonapi
-} // namespace v0
+} // namespace McuManager
+} // namespace dcluster
+} // namespace proj
+} // namespace v1
 
 namespace CommonAPI {
 }
 
 
 // Compatibility
-namespace v0_1 = v0;
+namespace v1_0 = v1;
 
-#endif // V0_COMMONAPI_EXAMPLES_HELLO_WORLD_HPP_
+#endif // V1_PROJ_DCLUSTER_MCUMANAGER_MCU_MANAGER_HPP_

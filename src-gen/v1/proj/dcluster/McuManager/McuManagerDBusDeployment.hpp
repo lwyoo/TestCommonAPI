@@ -8,12 +8,12 @@
 * http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef V0_COMMONAPI_EXAMPLES_Hello_World_DBUS_DEPLOYMENT_HPP_
-#define V0_COMMONAPI_EXAMPLES_Hello_World_DBUS_DEPLOYMENT_HPP_
+#ifndef V1_PROJ_DCLUSTER_MCUMANAGER_Mcu_Manager_DBUS_DEPLOYMENT_HPP_
+#define V1_PROJ_DCLUSTER_MCUMANAGER_Mcu_Manager_DBUS_DEPLOYMENT_HPP_
 
-#include <v0/commonapi/examples/CommonTypesDBusDeployment.hpp>
+#include <v1/proj/dcluster/McuManager/McuManagerTypesDBusDeployment.hpp>
 
-#include <v0/commonapi/examples/CommonTypesDBusDeployment.hpp>
+#include <v1/proj/dcluster/McuManager/McuManagerTypesDBusDeployment.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -21,10 +21,11 @@
 #include <CommonAPI/DBus/DBusDeployment.hpp>
 #undef COMMONAPI_INTERNAL_COMPILATION
 
-namespace v0 {
-namespace commonapi {
-namespace examples {
-namespace HelloWorld_ {
+namespace v1 {
+namespace proj {
+namespace dcluster {
+namespace McuManager {
+namespace McuManager_ {
 
 // Interface-specific deployment types
 
@@ -37,9 +38,10 @@ namespace HelloWorld_ {
 // Broadcast-specific deployments
 
 
-} // namespace HelloWorld_
-} // namespace examples
-} // namespace commonapi
-} // namespace v0
+} // namespace McuManager_
+} // namespace McuManager
+} // namespace dcluster
+} // namespace proj
+} // namespace v1
 
-#endif // V0_COMMONAPI_EXAMPLES_Hello_World_DBUS_DEPLOYMENT_HPP_
+#endif // V1_PROJ_DCLUSTER_MCUMANAGER_Mcu_Manager_DBUS_DEPLOYMENT_HPP_

@@ -8,7 +8,7 @@ class HelloStubMain {
 public:
     HelloStubMain();
     void Init();
-    void testFunction(int value);
+    void triggerEvent(int value);
 
 private:
     std::shared_ptr<HelloStubImpl> mMyService;

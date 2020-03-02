@@ -52,28 +52,26 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
-		HelloStubImpl.cpp \
-		HelloStubMain.cpp \
+SOURCES       = ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp \
+		CommonAPIStub.cpp \
+		CommonAPIStubImpl.cpp \
 		MainWindowStub.cpp \
 		MyQuickItemStub.cpp \
 		main.cpp qrc_qml.cpp \
 		moc_MyQuickItemStub.cpp \
 		moc_MainWindowStub.cpp
-OBJECTS       = HelloWorldDBusStubAdapter.o \
-		HelloWorldStubDefault.o \
-		HelloStubImpl.o \
-		HelloStubMain.o \
+OBJECTS       = McuManagerDBusStubAdapter.o \
+		McuManagerStubDefault.o \
+		CommonAPIStub.o \
+		CommonAPIStubImpl.o \
 		MainWindowStub.o \
 		MyQuickItemStub.o \
 		main.o \
 		qrc_qml.o \
 		moc_MyQuickItemStub.o \
 		moc_MainWindowStub.o
-DIST          = ../fidl/CommonTypes.fidl \
-		../fidl/hello.fidl \
-		/opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = /opt/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/common/linux.conf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/common/sanitize.conf \
@@ -275,13 +273,13 @@ DIST          = ../fidl/CommonTypes.fidl \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
-		StubImpl.pro HelloStubImpl.h \
-		HelloStubMain.h \
+		StubImpl.pro CommonAPIStub.h \
+		CommonAPIStubImpl.h \
 		MyQuickItemStub.h \
-		MainWindowStub.h ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp \
-		HelloStubImpl.cpp \
-		HelloStubMain.cpp \
+		MainWindowStub.h ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp \
+		CommonAPIStub.cpp \
+		CommonAPIStubImpl.cpp \
 		MainWindowStub.cpp \
 		MyQuickItemStub.cpp \
 		main.cpp
@@ -731,8 +729,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents HelloStubImpl.h HelloStubMain.h MyQuickItemStub.h MainWindowStub.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp HelloStubImpl.cpp HelloStubMain.cpp MainWindowStub.cpp MyQuickItemStub.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CommonAPIStub.h CommonAPIStubImpl.h MyQuickItemStub.h MainWindowStub.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp ../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp CommonAPIStub.cpp CommonAPIStubImpl.cpp MainWindowStub.cpp MyQuickItemStub.cpp main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -773,15 +771,15 @@ compiler_moc_header_make_all: moc_MyQuickItemStub.cpp moc_MainWindowStub.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_MyQuickItemStub.cpp moc_MainWindowStub.cpp
 moc_MyQuickItemStub.cpp: MyQuickItemStub.h \
-		HelloStubMain.h \
-		HelloStubImpl.h \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+		CommonAPIStub.h \
+		CommonAPIStubImpl.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -801,7 +799,7 @@ moc_MyQuickItemStub.cpp: MyQuickItemStub.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
@@ -1077,16 +1075,16 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-HelloWorldDBusStubAdapter.o: ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp ../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+McuManagerDBusStubAdapter.o: ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp ../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Version.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
@@ -1106,8 +1104,8 @@ HelloWorldDBusStubAdapter.o: ../src-gen/v0/commonapi/examples/HelloWorldDBusStub
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/OutputStream.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldDBusDeployment.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypesDBusDeployment.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusDeployment.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypesDBusDeployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusDeployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddressTranslator.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusAddress.hpp \
@@ -1152,15 +1150,15 @@ HelloWorldDBusStubAdapter.o: ../src-gen/v0/commonapi/examples/HelloWorldDBusStub
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusSerializableArguments.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/SerializableArguments.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/DBus/DBusClientId.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloWorldDBusStubAdapter.o ../src-gen/v0/commonapi/examples/HelloWorldDBusStubAdapter.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o McuManagerDBusStubAdapter.o ../src-gen/v1/proj/dcluster/McuManager/McuManagerDBusStubAdapter.cpp
 
-HelloWorldStubDefault.o: ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+McuManagerStubDefault.o: ../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp ../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -1180,19 +1178,20 @@ HelloWorldStubDefault.o: ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloWorldStubDefault.o ../src-gen/v0/commonapi/examples/HelloWorldStubDefault.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o McuManagerStubDefault.o ../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.cpp
 
-HelloStubImpl.o: HelloStubImpl.cpp HelloStubImpl.h \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+CommonAPIStub.o: CommonAPIStub.cpp CommonAPIStub.h \
+		CommonAPIStubImpl.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -1212,7 +1211,7 @@ HelloStubImpl.o: HelloStubImpl.cpp HelloStubImpl.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
@@ -1223,7 +1222,7 @@ HelloStubImpl.o: HelloStubImpl.cpp HelloStubImpl.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/MainLoopContext.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QtDebug \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -1287,17 +1286,16 @@ HelloStubImpl.o: HelloStubImpl.cpp HelloStubImpl.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloStubImpl.o HelloStubImpl.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CommonAPIStub.o CommonAPIStub.cpp
 
-HelloStubMain.o: HelloStubMain.cpp HelloStubMain.h \
-		HelloStubImpl.h \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+CommonAPIStubImpl.o: CommonAPIStubImpl.cpp CommonAPIStubImpl.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -1317,7 +1315,7 @@ HelloStubMain.o: HelloStubMain.cpp HelloStubMain.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
@@ -1328,7 +1326,7 @@ HelloStubMain.o: HelloStubMain.cpp HelloStubMain.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/MainLoopContext.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Runtime.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Factory.hpp \
-		/opt/Qt/5.12.3/gcc_64/include/QtCore/QtDebug \
+		/opt/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -1392,7 +1390,7 @@ HelloStubMain.o: HelloStubMain.cpp HelloStubMain.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HelloStubMain.o HelloStubMain.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CommonAPIStubImpl.o CommonAPIStubImpl.cpp
 
 MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/QQmlContext \
@@ -1530,15 +1528,15 @@ MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtCore/qmetaobject.h \
 		/opt/Qt/5.12.3/gcc_64/include/QtQml/qqmldebug.h \
 		MyQuickItemStub.h \
-		HelloStubMain.h \
-		HelloStubImpl.h \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+		CommonAPIStub.h \
+		CommonAPIStubImpl.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -1558,7 +1556,7 @@ MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
@@ -1583,15 +1581,15 @@ MainWindowStub.o: MainWindowStub.cpp MainWindowStub.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindowStub.o MainWindowStub.cpp
 
 MyQuickItemStub.o: MyQuickItemStub.cpp MyQuickItemStub.h \
-		HelloStubMain.h \
-		HelloStubImpl.h \
-		../src-gen/v0/commonapi/examples/HelloWorldStubDefault.hpp \
+		CommonAPIStub.h \
+		CommonAPIStubImpl.h \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStubDefault.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Export.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorldStub.hpp \
-		../src-gen/v0/commonapi/examples/CommonTypes.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerStub.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManagerTypes.hpp \
+		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployment.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/InputStream.hpp \
-		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ByteBuffer.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Deployable.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Enumeration.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Struct.hpp \
@@ -1611,7 +1609,7 @@ MyQuickItemStub.o: MyQuickItemStub.cpp MyQuickItemStub.h \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Types.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/ContainerUtils.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Event.hpp \
-		../src-gen/v0/commonapi/examples/HelloWorld.hpp \
+		../src-gen/v1/proj/dcluster/McuManager/McuManager.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Stub.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/Address.hpp \
 		/opt/GENIVI/include/CommonAPI-3.1/CommonAPI/CommonAPI.hpp \
