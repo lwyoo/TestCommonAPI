@@ -14,33 +14,46 @@ participant  "OpenGLDrawClass" as GL
 endbox
 
 MCU -> Impl : ...callback(ADAS Struct)
-Impl -> event : setData()
-event ->  event : store data
-event -> GL : state check -- (signal)
+
+Impl -> event : setADASInfo()
+activate event
+event -> event : setNextRequestData(new data)
+event -> GL : state check -- (signal or function call)
+deactivate event
 
 alt state == READY
 GL->event : state is [READY] -- (slot)
-event -> event : setCurrentRequestData(data)
-event -> event : setnextRequestData(null)
-event -> GL : request draw image ()  -- (signal)
-GL -> event : get ADAS data()
+activate event
+
+event -> event : setCurrentADASInfo(getNextRequestData())
+event -> event : setNextADASInfo(null)
+event --> GL : signalRequestGLDraw()
+deactivate event
+GL -> event : getCurrentADASInfo()
+activate GL
 GL -> GL : set State [DRAWING]
 rnote over GL
   화면 그리기
 endrnote
 GL -> GL : set State [DRAWING Complete]
-GL -> event : state is [DRAWING Complete]
-event -> event : setCurrentRequestData(NULL)
-
+GL --> event : signalGLStateChanged(DRAWING Complete)
+deactivate GL
+activate event
+'event -> event :slotReceivedGLState()
+event -> event : setCurrentADASInfo(NULL)
 else state != READY
+deactivate event
 GL->event : state is [DRAWING]
-event -> event : setnextRequestData(data)
+'activate event
+'event -> event : setnextRequestData(data)
+'deactivate event
 ...
 GL -> event : state is [DRAWING Complete]
-event -> event : setCurrentRequestData(NULL)
+activate event
+event -> event : setCurrentADASInfo(NULL)
 
-alt state != next data NULL
-event -> event : setCurrentRequestData(NextData)
+alt nextData !=  NULL
+event -> event : setCurrentADASInfo(getNextRequestData())
 event -> event : setNextRequestData(NULL)
 event -> GL : request draw image ()
 GL -> event : get ADAS data()
@@ -50,7 +63,7 @@ rnote over GL
 endrnote
 GL -> GL : set State [DRAWING Complete]
 GL -> event : state is [DRAWING Complete]
-event -> event : setCurrentRequestData(NULL)
+event -> event : setCurrentADASInfo(NULL)
 
 
 else state == next data NULL

@@ -36,12 +36,24 @@ private:
     void setNextADASInfo(const MCUManagerType::StAdasInfo& currentData);
     MCUManagerType::StAdasInfo& getNextADASInfo();
 
-    void clearCurrentData();
-    void clearNextData();
+    ///////////////////////
+    // update data state //
+    ///////////////////////
+    void setCurrentADASInfoValid();
+    void setCurrentADASInfoInValid();
+
+    void setNextADASInfoValid();
+    void setNextADASInfoInValid();
+
+    void setCurrentADASInfoValid(const bool isValid);
+    void setNextADASInfoValid(const bool isValid);
 
 private:
     MCUManagerType::StAdasInfo mCurrentADASInfo; // drawing data
     MCUManagerType::StAdasInfo mNextADASInfo; // buffer & draw wait data
+
+    bool mCurrentADASInfoValid = false;
+    bool mNextADASInfoValid = false;
 
 signals:
     void signalRequestGLState();
