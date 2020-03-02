@@ -1,0 +1,33 @@
+@startuml
+
+
+state "NONE" as none: init() 요청 전
+state "INIT" as init : init 진행 중
+state "READY" as ready : init 완료 \ndrawing 가능한 상태
+state "ADAS_ON" as on : ADAS On 요청 진행
+state "ADAS_OFF" as off : ADAS Off 요청 진행
+state "DRAWING" as drawing : gl 을 사용한 화면 create
+state "DRAW_COMPLETE" as complete : drawing 이 완료된 상태
+
+state fork_state <<fork>>
+
+[*] --> none
+none --> init
+init --> ready
+
+ready --> fork_state
+fork_state --> on
+fork_state --> off
+fork_state --> drawing
+
+state join_state <<join>>
+
+on --> join_state
+off --> join_state
+drawing --> join_state
+
+join_state --> complete
+complete --> ready
+
+
+@enduml

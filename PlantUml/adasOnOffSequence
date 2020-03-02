@@ -1,0 +1,56 @@
+@startuml
+title init sequence
+box "Other threads" #lightgreen
+participant "MCU" as MCU
+participant  "CommonAPIProxyImpl" as Impl
+participant  "eventBuffer" as event
+endbox
+box "GUI Thread" #lightblue
+participant  "OpenGLDrawClass" as GL
+endbox
+
+Impl -> event : ADAS On Signal
+event -> GL : state check
+
+alt ADAS  화면이고 ADAS Off 인 상태에서 ADAS On 시그널을 전달 받으면 Animation 처리
+GL -> GL : set State  [ADAS ON ]
+GL -> GL : seqeuence animation start
+GL -> GL : seqeuence animation start complete
+
+
+GL -> event : state is [DRAW Complete]
+
+...차선 정보등 표시...
+
+alt state != next data NULL
+event -> event : setCurrentRequestData(NextData)
+event -> event : setNextRequestData(NULL)
+event -> GL : request draw image ()
+GL -> event : get ADAS data()
+GL -> GL : set State  [DRAWING]
+rnote over GL
+  화면 그리기
+endrnote
+GL -> GL : set State [DRAWING Complete]
+GL -> event : state is [DRAWING Complete]
+event -> event : setCurrentRequestData(NULL)
+
+
+else state == next data NULL
+
+end
+
+else ADAS  화면이고 ADAS On 인 상태에서 ADAS Off 시그널을 전달 받으면 Animation 처리
+rnote over event
+ADAS OFF이벤트 전달시 EventBuffer의 데이터 모두 clear
+endrnote
+GL -> GL : set State [ADAS OFF]
+GL -> GL : seqeuence animation start
+GL -> GL : seqeuence animation start complete
+
+
+GL -> event : state is [DRAW Complete]
+
+end
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+title init sequence
+box "Other threads" #lightgreen
+participant  "CommonAPIProxyImpl" as Impl
+'eventBuffer 에서 데이터도 같이 가지고 있어야 되는지 아니면 노티만 처리해야 되는지 확인 필요
+'데이터를 가지고 있어야 싱크가 맞을거같음 혹은 데이터 아이디 만들기
+participant  "eventBuffer" as event
+endbox
+box "GUI Thread" #lightblue
+participant  "MainWindow" as MainWindow
+participant  "OpenGLDrawClass" as GL
+endbox
+
+...
+MainWindow -> GL : init()
+GL -> GL : setState (NONE)
+
+rnote over GL
+  texture image setting
+endrnote
+
+rnote over GL
+  shader setting
+endrnote
+
+event <-- GL : signal connect( requestDraw)
+
+GL -> GL : setState (READY)
+GL -> MainWindow
+...
+
+
+Impl -> event : init()
+
+event -> event : init()
+rnote over event
+  currentData(DataContainerClass(NULL))
+endrnote
+rnote over event
+  nextData(DataContainerClass(NULL))
+endrnote
+
+event --> GL : signal connect(setState)
+
+
+
+event -> Impl : init finish
+
+
+
+@enduml
