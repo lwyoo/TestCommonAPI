@@ -5,9 +5,7 @@ class QObject {
 
 }
 
-class EventBuffer << (S,#FF7700) Singleton >> {
 
-}
 
 class GL << (S,#FF7700) Singleton >> {
 
@@ -41,8 +39,7 @@ enum GL_STATE {
 QQuickFramebufferObject::Renderer -up-|> QQuickItem
 GL -up-|> QObject
 GL -up-|> QQuickFramebufferObject::Renderer
-EventBuffer - GL
-EventBuffer *-- DataContainer : 데이터 저장 타입
+DataContainer - GL : 데이터 저장 타입
 
 
 

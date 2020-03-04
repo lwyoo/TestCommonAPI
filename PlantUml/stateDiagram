@@ -26,8 +26,10 @@ on --> join_state
 off --> join_state
 drawing --> join_state
 
-join_state --> complete
-complete --> ready
+'join_state --> complete
+'complete --> ready
+
+join_state --> ready
 
 
 @enduml
