@@ -1,0 +1,39 @@
+@startuml
+title init sequence
+box "Other threads" #lightgreen
+participant "MCU" as MCU
+participant  "CommonAPIProxyImpl" as Impl
+endbox
+box "GUI Thread" #lightblue
+participant  "OpenGLDrawClass" as GL
+endbox
+
+
+
+Impl -> GL : ADAS On Signal
+alt ADAS  화면이고 ADAS Off 인 상태에서 ADAS On 시그널을 전달 받으면 Animation 처리
+alt state is [DRAW]
+else
+rnote over GL
+draw 종료
+endrnote
+else  state is [READY]
+end
+GL -> GL : set state [ADAS ON]
+GL -> GL : seqeuence animation start
+GL -> GL : set state [READY]
+else ADAS  화면이고 ADAS On 인 상태에서 ADAS Off 시그널을 전달 받으면 Animation 처리
+alt state is [DRAW]
+else
+rnote over GL
+draw 종료
+endrnote
+else  state is [READY]
+end
+GL -> GL : set state [ADAS ON]
+GL -> GL : seqeuence animation start
+GL -> GL : set state [READY]
+end
+
+
+@enduml

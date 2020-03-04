@@ -38,6 +38,10 @@ alt state is [DRAW]
 rnote over GL
 마지막 Image 표출
 endrnote
+else state is ADAS ON/OFF
+rnote over GL
+timer 를 이용한 화면 변경 없이 바로 표출 !!!!
+endrnote
 else state is [READY]
 end
 GL -> GL : setDrawADASInfoData(getADASInfo())
