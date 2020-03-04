@@ -1,0 +1,75 @@
+@startuml
+
+title draw sequence
+
+box "Other threads" #lightgreen
+participant "MCU" as MCU
+participant  "CommonAPIProxyImpl" as Impl
+'eventBuffer 에서 데이터도 같이 가지고 있어야 되는지 아니면 노티만 처리해야 되는지 확인 필요
+'데이터를 가지고 있어야 싱크가 맞을거같음 혹은 데이터 아이디 만들기
+participant  "DataContainer" as data
+endbox
+box "GUI Thread" #lightblue
+participant  "OpenGLDrawClass" as GL
+endbox
+
+MCU -> Impl : ...callback(ADAS Struct)
+Impl -> data : setADASInfo()
+activate data
+rnote over data
+데이터 저장
+endrnote
+
+data -> GL : signalDrawImage
+deactivate data
+activate GL
+GL -> GL : slotDrawImage
+
+
+
+GL -> data : getADASInfo()
+
+
+alt getADASInfo() 데이터와 현재 그리고 있는 데이터 ( drawADASInfoData() ) 가 동일하면
+
+else update 된 데이터와 현재 그리고 있는 데이터가 다르면
+
+alt state is [DRAW]
+rnote over GL
+마지막 Image 표출
+endrnote
+else state is [READY]
+end
+GL -> GL : setDrawADASInfoData(getADASInfo())
+GL -> GL : set state [DRAW]
+GL -> GL : restTimer
+end
+
+
+deactivate GL
+alt  0ms
+rnote over GL
+기존 화면 표시
+& 다음에 그릴 화면에 대한 연산
+endrnote
+else 16ms
+rnote over GL
+0ms 에 계산한 데이터를 이용하여 화면 갱신
+& 다음 타이머 이벤트에 그릴(32ms) 화면에 대한 연산
+endrnote
+else 32ms
+rnote over GL
+16ms 에 계산한 데이터를 이용하여 화면 갱신
+& 다음 타이머 이벤트에 그릴(40ms) 화면에 대한 연산
+endrnote
+else 40ms
+rnote over GL
+32ms 에 계산한 데이터를 이용하여 화면 갱신
+& timer stop
+GL -> GL : set state [READY]
+endrnote
+end
+
+
+
+@enduml
